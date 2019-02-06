@@ -2,6 +2,6 @@ package gedimai;
 
 public enum GedimuRusys {
 	
-	Elektroninio_pağto_nesklandumai, Spausdintûvo_nesklandumai, Narğyklës_klaidos, Programinës_árangos_instaliavimas, Kiti_darbai
+	Elektroninio_paÅ¡to_nesklandumai, SpausdintÅ«vo_nesklandumai, NarÅ¡yklÄ—s_klaidos, PrograminÄ—s_Ä¯rangos_instaliavimas, Kiti_darbai
 
 }

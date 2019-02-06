@@ -2,6 +2,6 @@ package skyriai;
 
 public enum Skyriai {
 	
-	Informatikos_skyrius, Aptarnavimo_skyrius, Personalo_skyrius, Finansø_skyrius
+	Informatikos_skyrius, Aptarnavimo_skyrius, Personalo_skyrius, FinansÅ³_skyrius
 
 }
