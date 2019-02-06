@@ -7,11 +7,11 @@ public class MySqlConnect {
     public Connection getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/help_desk?autoReconnect=true&useSSL=false", "admin", "help1111");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://192.168.115.156/help_desk?autoReconnect=true&useSSL=false", "admin", "help1111");
             return conn;
         }
         catch (Exception e) {
-        	System.out.println("Ávyko MySqlConnect klaida: "+e);
+        	System.out.println("ï¿½vyko MySqlConnect klaida: "+e);
             return null;
         }
     }
