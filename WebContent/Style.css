@@ -1,0 +1,194 @@
+@charset "UTF-8";
+
+#centerAndBigSize {
+	padding: 30% 50px;
+	text-align: center;
+	font-size: 30px;
+	color: white;
+	font-family: sans-serif;
+	font-weight: bold;
+}
+
+#login {
+	color: #003300;
+	font-family: sans-serif;
+	font-weight: bold;
+	text-align: center;
+	font-size: 30px;
+	text-shadow: 0 0 0 #003300;
+}
+
+#loginPrisijungimas {
+	color: #003300;
+	font-family: sans-serif;
+	font-weight: bold;
+	text-align: center;
+	font-size: 20px;
+	text-transform: uppercase;
+	text-shadow: 0 0 0 #003300;
+}
+
+fieldset {
+	margin-top: 25;
+	border: 1px solid #003300;
+	border-radius: 8px;
+	box-shadow: 0 0 5px #003300;
+	width: 450px;
+	margin: 0 auto;
+}
+
+legend {
+	background-color: #003300;
+	box-shadow: 0 0 10px #003300;
+	font-weight: bold;
+	padding: 2px 2px;
+	border-radius: 3px;
+	color: white;
+	text-align: center;
+	text-transform: uppercase;
+	width: 400px;
+}
+
+.loginForm input[type="text"], .loginForm input[type="password"], input, select, textarea {
+	margin: 5px auto;
+	text-align: center;
+	font-family: sans-serif;
+	padding: 4px 6px;
+	width: 200px;
+	outline: #003300;
+	border-radius: 8px;
+	transition: 0.25s;
+}
+
+input:hover {
+	box-shadow: 0 1px 3px 1px #133913;
+	transition: all 150ms linear;
+}
+
+.loginForm input[type="submit"] {
+	background-color: #133913;
+	margin-top: 30px;
+	font-family: sans-serif;
+	color: white;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 10px 22px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	border-radius: 8px;
+	box-shadow: 0 2px 5px 1px #133913;
+}
+
+.loginForm input[type="submit"]:hover {
+	background: #0d260d;
+}
+
+#bd {
+	color: #133913;
+	text-align: center;
+}
+
+#header {
+	background: #0d260d;
+	color: white;
+	text-align: right;
+}
+
+.menu{
+	margin: 0;
+	width: 100%;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #0d260d;
+  text-transform: uppercase;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+#pasirinktoMenuPunktoDefaultSettings{
+	margin-top: 1%;
+	color: #003300;
+	font-family: sans-serif;
+	font-weight: bold;
+	text-align: left;
+	font-size: 16px;
+	text-transform: uppercase;
+	margin-left: 30%;
+	width: 600px;
+}
+.inputas {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+#pasirinktoMenuPunktoDefaultDefaultSettingsKeitimas{
+	margin-top: 3%;
+	font-weight: normal;
+	text-transform: lowercase;
+	font-size: 14px;
+}
+#btnSukurtiNaudotoja{
+		text-align: right;
+		
+}
+#pastabos{
+		font-size: 10px;	
+}
+
+#customers {
+    font-family: sans-serif;
+    width: 100%;  
+}
+
+
+
+#customers th {
+	border: 1px solid #142a52;
+}
+#customers td {
+	border: 1px solid #ddd;
+	
+}
+#customers td, #customers th {
+    padding: 8px;
+    font-size: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100px;
+}
+#customers tr:hover {
+	background-color: #ddd;
+	box-shadow: 0px 0px 7px 0px grey;
+	transition: all 200ms linear;
+	
+	}
+	
+table tr.selected {
+	font-weight: bold;
+    background-color: grey;
+}
+
+#boldAndCapslook{
+	font-weight: bold;
+	color: #003300;
+	text-decoration: none;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+
