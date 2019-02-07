@@ -12,7 +12,7 @@ import login.LoginUserAtribute;
 
 
 
-public class LoginUserFromMySql extends MySqlConnect{
+public class LoginUserFromMySql2 extends MySqlConnect{
  
 	public boolean getBossConnection (String loginName, String loginPassword) {
 	    Connection connection = (Connection) getConnection();

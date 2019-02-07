@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +12,6 @@ import service.NaujoNaudotojoSukurimas;
 
 @WebServlet("/SukurtiDBNaudotoja")
 public class SukurtiDBNaudotoja extends HttpServlet {
-	private String userLoginName;
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +31,7 @@ public class SukurtiDBNaudotoja extends HttpServlet {
 				(email.isEmpty() || email.length()>240) ||
 				(userSkyrius.equals("-1") || userPareigos.equals("-1") || userVaidmuo.equals("-1")))
 		{
-			System.out.println("KLAIDA: Nurodytos nevisos reikðmës arba virðijamas leistinas simboliø skaièius");
+			System.out.println("KLAIDA: Nurodytos nevisos reikï¿½mï¿½s arba virï¿½ijamas leistinas simboliï¿½ skaiï¿½ius");
 			return;
 		} 
 		

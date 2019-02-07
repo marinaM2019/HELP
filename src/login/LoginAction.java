@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mySql.connection.LoginUserFromMySql;
+import mySql.connection.LoginUserFromMySql2;
 
 
 
@@ -24,7 +24,7 @@ public class LoginAction extends HttpServlet {
 	String pareigos="";
 	
 	//User loginUser = new User();
-	LoginUserFromMySql loginUserFromMySql = new LoginUserFromMySql();
+	LoginUserFromMySql2 loginUserFromMySql = new LoginUserFromMySql2();
 	private static final long serialVersionUID = 1L;
       
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
