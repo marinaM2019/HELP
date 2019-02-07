@@ -3,6 +3,14 @@
         <%@ page import = "vaidmenys.Vaidmuo" %>
         <%@ page import = "skyriai.Skyrius" %>
         <%@ page import = "visosPareigos.Pareigos" %>
+        
+            <%@ page import="java.sql.Connection" %> 
+<%@ page import="java.sql.PreparedStatement" %> 
+<%@ page import="java.sql.ResultSet" %> 
+<%@ page import="javax.xml.XMLConstants" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="mySql.connection.MySqlConnect" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -45,6 +53,8 @@ Prisijungimo vardas*:
 <input type="text" name="userLoginName" class="inputas" placeholder="pvz. vc000">
 Slaptažodis**:
 <input type="password" name="passw" class="inputas">
+Pakartoti slaptažodį:
+<input type="password" name="passwConf" class="inputas">
 Vardas:
 <input type="text" name="userName" class="inputas">
 Pavardė:
@@ -54,10 +64,28 @@ El.paštas:
 Skyrius:
 <select class="inputas" name="userSkyrius">
 <option value="-1">Pasirinkite</option>
-<option value="<%= skyrius.getSkyrius().Informatikos_skyrius %>"><%= skyrius.getSkyrius().Informatikos_skyrius %></option>
-<option value="<%= skyrius.getSkyrius().Aptarnavimo_skyrius %>"><%= skyrius.getSkyrius().Aptarnavimo_skyrius %></option>
-<option value="<%= skyrius.getSkyrius().Finansų_skyrius %>"><%= skyrius.getSkyrius().Finansų_skyrius %></option>
-<option value="<%= skyrius.getSkyrius().Personalo_skyrius %>"><%= skyrius.getSkyrius().Personalo_skyrius %></option>
+
+  <%
+  Class.forName("com.mysql.jdbc.Driver");
+  MySqlConnect mySqlConnect = new MySqlConnect();
+  Connection connection = mySqlConnect.getConnection();
+  
+  String sql = "SELECT id, pavadinimas FROM skyriai WHERE statusas=1";
+  try {
+      PreparedStatement pst = connection.prepareStatement(sql);
+      ResultSet rs=pst.executeQuery();
+      while (rs.next()) {
+    	  %>
+    	  <option value="<%=rs.getInt("id")%>"><%=rs.getString("pavadinimas")%></option>
+          <%
+      }
+      connection.close();
+  } catch (Exception e) {
+      
+}
+%>
+
+
 </select>
 Pareigos:
 <select class="inputas" name="userPareigos">

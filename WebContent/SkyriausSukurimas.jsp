@@ -26,12 +26,17 @@ if(session.getAttribute("loginName")==null){
 %>
 <body>
 <%
+
 String skyriausPavadinimas = request.getParameter("skyriausPavadinimas");
 String skyriausStatusas = request.getParameter("skyriausStatusas");
 
+if (skyriausPavadinimas.isEmpty() || (skyriausStatusas.equals("-1"))){
+	return;
+}
+
 SukurtiSkyriu sukurtiSkyriu = new SukurtiSkyriu();
 sukurtiSkyriu.sukurtiNauja(skyriausPavadinimas, skyriausStatusas);
-response.sendRedirect("Administravimas.jsp");
+response.sendRedirect("SkyriuAdministravimas.jsp");
 
 %>
 

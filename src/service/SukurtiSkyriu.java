@@ -7,13 +7,13 @@ import mySql.connection.MySqlConnect;
 
 public class SukurtiSkyriu extends MySqlConnect{
 
-	public void sukurtiNauja (String skyriausPavadinimas, String statusas) {
+	public void sukurtiNauja (String skyriausPavadinimas, String skyriausStatusas) {
 	    Connection conn = (Connection) getConnection();
 	    String Sql = "INSERT  INTO skyriai (pavadinimas, statusas) VALUES (?, ?)";	    
 	    try {
 	        PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
 	        pst.setString(1, skyriausPavadinimas);
-	        pst.setString(2, statusas);
+	        pst.setString(2, skyriausStatusas);
 	        pst.executeUpdate();
 	        conn.close();
 	    } catch (NullPointerException e) {

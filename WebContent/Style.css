@@ -131,6 +131,32 @@ li a {
 	margin-left: 30%;
 	width: 600px;
 }
+
+#menuPunktasSukurtiSkyriu{
+	margin-top: 1%;
+	margin-left: 20px;
+	color: #003300;
+	font-family: sans-serif;
+	font-weight: bold;
+	text-align: left;
+	font-size: 16px;
+	text-transform: uppercase;
+	margin-left: 30%;
+	width: 400px;
+}
+
+#menuPunktasRedaguotiSkyriu{
+	margin-top: 1%;
+	margin-left: 500px;
+	color: #003300;
+	font-family: sans-serif;
+	font-weight: bold;
+	text-align: left;
+	font-size: 16px;
+	text-transform: uppercase;
+	margin-left: 30%;
+	width: 400px;
+}
 .inputas {
     min-width: 100%;
     max-width: 100%;
@@ -150,28 +176,38 @@ li a {
 		font-size: 10px;	
 }
 
-#customers {
+
+table {
+  display: block;
+  height: 300px;
+  overflow-x: auto;
+  overflow-y: scroll;
+  box-shadow: 0 1px 2px 0px #142a52;
+  
+}
+
+#lentele {
     font-family: sans-serif;
     width: 100%;  
 }
 
 
 
-#customers th {
+#lentele th {
 	border: 1px solid #142a52;
 }
-#customers td {
+#lentele td {
 	border: 1px solid #ddd;
 	
 }
-#customers td, #customers th {
+#lentele td, #lentele th {
     padding: 8px;
     font-size: 12px;
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100px;
 }
-#customers tr:hover {
+#lentele tr:hover {
 	background-color: #ddd;
 	box-shadow: 0px 0px 7px 0px grey;
 	transition: all 200ms linear;

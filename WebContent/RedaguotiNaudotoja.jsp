@@ -39,7 +39,7 @@ if(session.getAttribute("loginName")==null){
 <br>
 
 
-<table id="customers" onload="selectedRowToInput();">
+<table id="lentele">
 <colgroup>
 	<col style="width:5%">
     <col style="width:10%">
@@ -68,7 +68,7 @@ Class.forName("com.mysql.jdbc.Driver");
   MySqlConnect mySqlConnect = new MySqlConnect();
   Connection connection = mySqlConnect.getConnection();
 
-String sql = "SELECT id, login_name, user_name, user_surname, email, skyrius, pareigos, vaidmuo FROM users";
+String sql = "SELECT id, login_name, user_name, user_surname, email, skyrius, pareigos, vaidmuo FROM users ORDER BY login_name";
 
 try {
     PreparedStatement pst = connection.prepareStatement(sql);

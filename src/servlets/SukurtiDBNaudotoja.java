@@ -17,6 +17,7 @@ public class SukurtiDBNaudotoja extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userLoginName = request.getParameter("userLoginName").toLowerCase().trim();
 		String passw = request.getParameter("passw");
+		String passwConf = request.getParameter("passwConf");
 		String userName = request.getParameter("userName");
 		String userSurname = request.getParameter("userSurname");
 		String email = request.getParameter("email");
@@ -25,7 +26,7 @@ public class SukurtiDBNaudotoja extends HttpServlet {
 		String userVaidmuo = request.getParameter("userVaidmuo");
 		
 		if ((userLoginName.isEmpty() || userLoginName.length()>6) || 
-				(passw.isEmpty() || passw.length()>10) ||
+				(passw.isEmpty() || passw.length()>10 && (!(passw.equals(passwConf)))) ||
 				(userName.isEmpty() || userName.length()>110) ||
 				(userSurname.isEmpty() || userSurname.length()>110) ||
 				(email.isEmpty() || email.length()>240) ||

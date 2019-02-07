@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
         <%@ page import = "statusai.Statusas" %>
+            <%@ page import="java.sql.Connection" %> 
+<%@ page import="java.sql.PreparedStatement" %> 
+<%@ page import="java.sql.ResultSet" %> 
+        <%@ page import="java.sql.SQLException" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="mySql.connection.MySqlConnect" %>
+<%@ page import="statusai.Statusas" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,25 +36,83 @@ if(session.getAttribute("loginName")==null){
 </head>
 <body>
 <%@include file="SuperAdminMenu.jsp" %>
-<div id="pasirinktoMenuPunktoDefaultSettings">
---| Sukurti skyrių |-- --| Redaguoti skyrių |--
+<div id="menuPunktasSukurtiSkyriu">
+--| Sukurti skyrių |--
+
+
 <div id="pasirinktoMenuPunktoDefaultDefaultSettingsKeitimas">
 <form action="SkyriausSukurimas.jsp" method="post">
 pavadinimas
-<input type="text" class="inputas" id="skyriausPavadinimas">
-Statusas
-<select class="inputas" id="skyriausStatusas">
+<input type="text" class="inputas" name="skyriausPavadinimas">
+
+
+<select class="inputas" name="skyriausStatusas">
 <option value="-1">Pasirinkite</option>
-<option value="1"><%= statusas.getStatusas().active%></option>
+<option value="1"><%= statusas.getStatusas().active %></option>
 <option value="2"><%= statusas.getStatusas().diactive %></option>
 </select>
+
 <div id="btnSukurtiNaudotoja">
-<input type="button" value="Sukurti">
+<input type="submit" value="Sukurti">
 
 </div>
 </form>
 </div>
-</div>
+
+
+</div> 
+<div id="menuPunktasRedaguotiSkyriu">
+ --| Redaguoti skyrių |--
+ 
+ 
+ <table id="lentele">
+<colgroup>
+	<col style="width:70%">
+    <col style="width:30%">
+  </colgroup> 
+  <thead>
+  <tr >
+  	<th>Pavadinimas</th>
+    <th>Statusas</th>
+  </tr>
+  <%
+
+
+Class.forName("com.mysql.jdbc.Driver");
+  MySqlConnect mySqlConnect = new MySqlConnect();
+  Connection connection = mySqlConnect.getConnection();
+
+String sql = "select p.pavadinimas, s.statusas from skyriai p inner join statusas s on p.statusas=s.id ORDER BY p.pavadinimas";
+
+try {
+    PreparedStatement pst = connection.prepareStatement(sql);
+    ResultSet rs=pst.executeQuery();
+    while (rs.next()) {
+            %>
+            <tbody>
+            <tr class="item">
+                       
+	        	<td><%=rs.getString("p.pavadinimas")%></td>
+                <td><%=rs.getString("s.statusas")%></td>
+            </tr>
+            </tbody>
+            <%
+                    }
+                    connection.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            %>
+            
+            
+            
+            
+        </table>
+ 
+ 
+ </div>
+
+
 
 
 

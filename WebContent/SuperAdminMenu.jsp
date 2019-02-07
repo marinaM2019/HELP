@@ -13,7 +13,7 @@
 
 <div class="menu">
 <ul>
-         <li><a href = "SukurtiNaudotoja.jsp">--| Naudotojų administravimas |--</a></li>
+         <li><a href = "SukurtiNaudotoja.jsp">--| Sukurti naudotoją |--</a></li>
          <li><a href = "RedaguotiNaudotoja.jsp">--| Redaguoti naudotoją |--</a></li>
          <li><a href = "SkyriuAdministravimas.jsp">--| Skyrių administravimas |--</a></li>
          <li><a href = "SuformuotiAtaskaita.jsp">--| Suformuoti ataskaitą |--</a></li>
