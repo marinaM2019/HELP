@@ -16,7 +16,7 @@ public class LoginUserFromMySql2 extends MySqlConnect{
  
 	public boolean getBossConnection (String loginName, String loginPassword) {
 	    Connection connection = (Connection) getConnection();
-	    String sql = "SELECT login_name, passw FROM help_desk.users WHERE vaidmuo=2 AND login_name='"+loginName+"' AND passw='"+loginPassword+"' AND vaidmuo='vadovas_it'";
+	    String sql = "SELECT login_name, passw FROM help_desk.users WHERE vaidmuo='vadovas%' AND login_name='"+loginName+"' AND passw='"+loginPassword+"' AND vaidmuo='vadovas_it'";
 	    try {
 	        PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();
@@ -33,7 +33,7 @@ public class LoginUserFromMySql2 extends MySqlConnect{
 	
 	public boolean getLocalAdminConnection (String loginName, String loginPassword) {
 	    Connection connection = (Connection) getConnection();
-	    String sql = "SELECT login_name, passw FROM help_desk.users WHERE vaidmuo=1 AND login_name='"+loginName+"' AND passw='"+loginPassword+"' AND vaidmuo='darbuotojas_it'";
+	    String sql = "SELECT login_name, passw FROM help_desk.users WHERE vaidmuo='darbuotojas%' AND login_name='"+loginName+"' AND passw='"+loginPassword+"' AND vaidmuo='darbuotojas_it'";
 	    try {
 	        PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();

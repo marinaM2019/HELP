@@ -1,15 +1,21 @@
 package service;
 
+import java.sql.SQLException;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
+import login.UsersTableEnum;
 import mySql.connection.MySqlConnect;
 
 public class NaujoNaudotojoSukurimas extends MySqlConnect {
 	
 	public void sukurtiNaudotoja (String loginName, String passwordas, String userName, String userSurname, String email, String skyrius, String pareigos, String vaidmuo) {
-	    Connection conn = (Connection) getConnection();
-	    String Sql = "INSERT  INTO users (login_name, passw, user_name, user_surname, email, skyrius, pareigos, vaidmuo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";	    
+		
+		
+	    
+		Connection conn = (Connection) getConnection();
+	    String Sql = "INSERT  INTO users (UserTableEnum.login_name, UsersTableEnum.passw, UsersTableEnum.user_name, UsersTableEnum.user_surname, UsersTableEnum.email, UsersTableEnum.skyrius, UsersTableEnum.pareigos, UsersTableEnum.vaidmuo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";	    
 	    try {
 	        PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
 	        pst.setString(1, loginName);
@@ -21,14 +27,16 @@ public class NaujoNaudotojoSukurimas extends MySqlConnect {
 	        pst.setString(7, pareigos);
 	        pst.setString(8, vaidmuo);
 	        pst.executeUpdate();
-	        conn.close();
-	    } catch (NullPointerException e) {
-	    	System.out.println(e);
-	    } catch (Exception ee){
+	        
+	    }  catch (Exception ee){
 	    	System.out.println(ee);
 	    }finally {
-	    	System.out.println("Naudotojo "+loginName+" - "+userName+" "+userSurname+" sukurimas");
-	    }
+	    	try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	    	}
 	}
 	
 }

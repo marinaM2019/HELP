@@ -68,7 +68,7 @@ Class.forName("com.mysql.jdbc.Driver");
   MySqlConnect mySqlConnect = new MySqlConnect();
   Connection connection = mySqlConnect.getConnection();
 
-String sql = "SELECT id, login_name, user_name, user_surname, email, skyrius, pareigos, vaidmuo FROM users ORDER BY login_name";
+String sql = "SELECT u.id, u.login_name, u.user_name, u.user_surname, u.email, s.pavadinimas, u.pareigos, u.vaidmuo FROM users u INNER JOIN skyriai s ON u.skyrius=s.id ORDER BY u.iraso_data DESC";
 
 try {
     PreparedStatement pst = connection.prepareStatement(sql);
@@ -78,14 +78,14 @@ try {
             <tbody>
             <tr class="item">
                        
-	        	<td><%=rs.getString("id")%></td>
-                <td><%=rs.getString("login_name")%></td>
-                <td><%=rs.getString("user_name")%></td>
-                <td><%=rs.getString("user_surname")%></td>
-                <td><%=rs.getString("email")%></td>
-                <td><%=rs.getString("skyrius")%></td>
-                <td><%=rs.getString("pareigos")%></td>
-                <td><%=rs.getString("vaidmuo")%></td>
+	        	<td><%=rs.getString("u.id")%></td>
+                <td><%=rs.getString("u.login_name")%></td>
+                <td><%=rs.getString("u.user_name")%></td>
+                <td><%=rs.getString("u.user_surname")%></td>
+                <td><%=rs.getString("u.email")%></td>
+                <td><%=rs.getString("s.pavadinimas")%></td>
+                <td><%=rs.getString("u.pareigos")%></td>
+                <td><%=rs.getString("u.vaidmuo")%></td>
             </tr>
             </tbody>
             <%

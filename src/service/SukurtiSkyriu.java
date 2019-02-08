@@ -1,5 +1,7 @@
 package service;
 
+import java.sql.SQLException;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
@@ -15,13 +17,15 @@ public class SukurtiSkyriu extends MySqlConnect{
 	        pst.setString(1, skyriausPavadinimas);
 	        pst.setString(2, skyriausStatusas);
 	        pst.executeUpdate();
-	        conn.close();
-	    } catch (NullPointerException e) {
-	    	System.out.println(e);
+	        
 	    } catch (Exception ee){
 	    	System.out.println(ee);
 	    }finally {
-	    	System.out.println("Skyriaus "+skyriausPavadinimas+" sukurimas");
-	    }
+	    	try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	    	}
 	}
 }

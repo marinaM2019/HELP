@@ -23,7 +23,6 @@ public class LoginAction extends HttpServlet {
 	String skyrius="";
 	String pareigos="";
 	
-	//User loginUser = new User();
 	LoginUserFromMySql2 loginUserFromMySql = new LoginUserFromMySql2();
 	private static final long serialVersionUID = 1L;
       
