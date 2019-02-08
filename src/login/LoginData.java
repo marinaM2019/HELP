@@ -15,7 +15,7 @@ public class LoginData {
     private String cvsSplitBy = ";";
     private String[] reiksme;
     private BufferedReader br = null;
-	private String csvFile = "/Users/HelpDesc/Users.csv";
+	private String csvFile = "resourse/Users.csv";
     
 
 	MySqlConnect connectToDb = new MySqlConnect();
