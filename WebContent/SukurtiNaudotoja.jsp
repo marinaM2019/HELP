@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
         <%@ page import = "vaidmenys.Vaidmuo" %>
-        <%@ page import = "skyriai.Skyrius" %>
-        <%@ page import = "visosPareigos.Pareigos" %>
-        
-            <%@ page import="java.sql.Connection" %> 
+        <%@ page import = "pareigos.Pareigos" %>
+        <%@ page import = "service.Skyriai" %>
+        <%@ page import="java.sql.Connection" %> 
 <%@ page import="java.sql.PreparedStatement" %> 
 <%@ page import="java.sql.ResultSet" %> 
 <%@ page import="javax.xml.XMLConstants" %>
@@ -19,9 +18,8 @@
 <link rel="stylesheet" href="Style.css"/>
 
 <%
-Vaidmuo vaidmuo = new Vaidmuo();
-Skyrius skyrius =new Skyrius();
-Pareigos pareigos = new Pareigos();
+	Vaidmuo vaidmuo = new Vaidmuo();
+Skyriai skyriai = new Skyriai();
 
 String username=String.valueOf(session.getAttribute("loginName"));
 
@@ -66,23 +64,13 @@ Skyrius:
 <option value="-1">Pasirinkite</option>
 
   <%
-  Class.forName("com.mysql.jdbc.Driver");
-  MySqlConnect mySqlConnect = new MySqlConnect();
-  Connection connection = mySqlConnect.getConnection();
+  for (int i=0; i<skyriai.gautiSarasa().size(); i++){
+	  %>
+	  <option value="<%= i %>"><%= skyriai.gautiSarasa().get(i).getPavadinimas() %></option>
+	  <%
+  }
+
   
-  String sql = "SELECT id, pavadinimas FROM skyriai WHERE statusas=1";
-  try {
-      PreparedStatement pst = connection.prepareStatement(sql);
-      ResultSet rs=pst.executeQuery();
-      while (rs.next()) {
-    	  %>
-    	  <option value="<%=rs.getInt("id")%>"><%=rs.getString("pavadinimas")%></option>
-          <%
-      }
-      connection.close();
-  } catch (Exception e) {
-      
-}
 %>
 
 
@@ -90,19 +78,15 @@ Skyrius:
 Pareigos:
 <select class="inputas" name="userPareigos">
 <option value="-1">Pasirinkite</option>
-<option value="<%= pareigos.getPareigos().Vedėjas %>"><%= pareigos.getPareigos().Vedėjas %></option>
-<option value="<%= pareigos.getPareigos().Vyriausiasis_specialistas %>"><%= pareigos.getPareigos().Vyriausiasis_specialistas %></option>
-<option value="<%= pareigos.getPareigos().Vyresnysis_specialistas %>"><%= pareigos.getPareigos().Vyresnysis_specialistas %></option>
-<option value="<%= pareigos.getPareigos().Specialistas %>"><%= pareigos.getPareigos().Specialistas %></option>
+<option value="<%= Pareigos.Vedėjas %>"><%= Pareigos.Vedėjas %></option>
+<option value="<%= Pareigos.Vyriausiasis_specialistas %>"><%= Pareigos.Vyriausiasis_specialistas %></option>
+<option value="<%= Pareigos.Vyresnysis_specialistas %>"><%= Pareigos.Vyresnysis_specialistas %></option>
+<option value="<%= Pareigos.Specialistas %>"><%= Pareigos.Specialistas %></option>
 </select>
 Vaidmuo:
 <select class="inputas" name="userVaidmuo">
 <option value="-1">Pasirinkite</option>
-<option value="<%= vaidmuo.getVaidmuo().vadovas_it %>"><%= vaidmuo.getVaidmuo().vadovas_it %></option>
-<option value="<%= vaidmuo.getVaidmuo().vadovas_aptarnavimo_skyrius %>"><%= vaidmuo.getVaidmuo().vadovas_aptarnavimo_skyrius %></option>
 <option value="<%= vaidmuo.getVaidmuo().darbuotojas_it %>"><%= vaidmuo.getVaidmuo().darbuotojas_it %></option>
-<option value="<%= vaidmuo.getVaidmuo().darbuotojas_aptarnavimo_skyrius %>"><%= vaidmuo.getVaidmuo().darbuotojas_aptarnavimo_skyrius %></option>
-<option value="<%= vaidmuo.getVaidmuo().paraisku_nagrinejimas %>"><%= vaidmuo.getVaidmuo().paraisku_nagrinejimas %></option>
 <option value="<%= vaidmuo.getVaidmuo().user %>"><%= vaidmuo.getVaidmuo().user %></option>
 </select>
 <div id="btnSukurtiNaudotoja">

@@ -12,7 +12,7 @@
 
 <form class="loginForm" action="LoginAction" method="post">
 
-<fieldset><div id="login">GPU registravimas<br><br></div>
+<fieldset><div id="login">Gedimų registravimas<br><br></div>
 <div id="loginPrisijungimas">
 Prisijungimas<br>
 
@@ -23,7 +23,7 @@ Prisijungimas<br>
 </div>
 </h2>
 </fieldset>
-<div id="bd">Gedimų, paraiškų, užklausų registravimas, baigiamasis darbas</div>
+
 
 </form>
 </body>

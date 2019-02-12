@@ -13,7 +13,8 @@ response.setHeader("Progma", "no-cache");
 response.setHeader("Expires", "0");
 if(session.getAttribute("loginName")==null){
 	response.sendRedirect("Login.jsp");
-
+} else if ((session.getAttribute("loginName").equals("help"))){
+	response.sendRedirect("Administravimas.jsp");
 }
 %>
 
@@ -23,7 +24,8 @@ if(session.getAttribute("loginName")==null){
 </head>
 <body>
 
-LocalAdmin
+
+
 
 
 

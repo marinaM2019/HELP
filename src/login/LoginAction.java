@@ -3,6 +3,7 @@ package login;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mySql.connection.LoginUserFromMySql2;
+import mySql.connection.LoginUserFromMySql;
+
+
+
+//import mySql.connection.LoginUserFromMySql2;
 
 
 
@@ -23,41 +28,63 @@ public class LoginAction extends HttpServlet {
 	String skyrius="";
 	String pareigos="";
 	
-	LoginUserFromMySql2 loginUserFromMySql = new LoginUserFromMySql2();
+	LoginUserFromMySql loginUserFromMySql = new LoginUserFromMySql();
 	private static final long serialVersionUID = 1L;
       
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		LoginData loginData = new LoginData();
+		//LoginData loginData = new LoginData();
 		String loginName = request.getParameter("loginName").toLowerCase().trim();
 		String loginPassword = request.getParameter("loginPassword");
 				
-			if (loginData.getSuperAdminLogin(loginName, loginPassword)) {
-				try {
-			response.sendRedirect("Administravimas.jsp");
-			session.setAttribute("loginName", loginName);
-			session.setAttribute("name", "super administratorius");
-			session.setAttribute("surname", "");
-			session.setAttribute("skyrius", "");
-			session.setAttribute("pareigos", "");
-				} catch (Exception e) {
-					session.setAttribute("surname", "");
-					session.setAttribute("skyrius", "");
-					session.setAttribute("pareigos","");
-				}
-			return;
-			}
-			else if (loginUserFromMySql.getBossConnection(loginName, loginPassword)) {
-				response.sendRedirect("Boss.jsp");
-			} else if (loginUserFromMySql.getLocalAdminConnection(loginName, loginPassword)) {
-				response.sendRedirect("LocalAdmin.jsp");	
-			} else if (loginUserFromMySql.getUserConnection(loginName, loginPassword)) {
-				response.sendRedirect("Home.jsp");
-			} 
-			else {
-				response.sendRedirect("BadLogin.jsp");
+			try {
+				if (loginUserFromMySql.getSuperAdminLogin(loginName, loginPassword)) {
+					try {
+				response.sendRedirect("Administravimas.jsp");
+				session.setAttribute("loginName", loginName);
+				session.setAttribute("name", "super administratorius");
+				session.setAttribute("surname", "");
+				session.setAttribute("skyrius", "");
+				session.setAttribute("pareigos", "");
+					} catch (Exception e) {
+						session.setAttribute("surname", "");
+						session.setAttribute("skyrius", "");
+						session.setAttribute("pareigos","");
+					}
 				return;
+				} else
+					try {
+						if (loginUserFromMySql.getBossConnection(loginName, loginPassword)) {
+							response.sendRedirect("Boss.jsp");
+						} else
+							try {
+								if (loginUserFromMySql.getLocalAdminConnection(loginName, loginPassword)) {
+									response.sendRedirect("LocalAdmin.jsp");	
+								} else
+									try {
+										if (loginUserFromMySql.getUserConnection(loginName, loginPassword)) {
+											response.sendRedirect("Home.jsp");
+										} 
+										else {
+											response.sendRedirect("BadLogin.jsp");
+											return;
+										}
+									} catch (SQLException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			} catch (SQLException | ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}	
 			
 			

@@ -7,6 +7,7 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="mySql.connection.MySqlConnect" %>
+<%@ page import="service.Naudotojai" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,40 +62,33 @@ if(session.getAttribute("loginName")==null){
     <th>Pareigos</th>
     <th>Vaidmuo</th>
   </tr>
+              <tbody>
+            <tr class="item">
   <%
+Naudotojai naudotojai = new Naudotojai();
+for (int i=0; i<naudotojai.gautiNaudotojuSarasa().size(); i++){
+	%>
+	<tr>
+	<td><%= naudotojai.gautiNaudotojuSarasa().get(i).getId()%></td>
+	<td><%= naudotojai.gautiNaudotojuSarasa().get(i).getLoginName()%></td>
+	<td><%= naudotojai.gautiNaudotojuSarasa().get(i).getName()%></td>
+	<td><%= naudotojai.gautiNaudotojuSarasa().get(i).getSurname()%></td>
+	<td><%= naudotojai.gautiNaudotojuSarasa().get(i).getEmail()%></td>
+	<td><%= naudotojai.gautiNaudotojuSarasa().get(i).getSkyriausPavadinimas()%></td>
+	<td><%= naudotojai.gautiNaudotojuSarasa().get(i).getPareigos()%></td>
+	<td><%= naudotojai.gautiNaudotojuSarasa().get(i).getVaidmuo()%></td>
+	</tr>
+	<%
+}
 
 
-Class.forName("com.mysql.jdbc.Driver");
-  MySqlConnect mySqlConnect = new MySqlConnect();
-  Connection connection = mySqlConnect.getConnection();
-
-String sql = "SELECT u.id, u.login_name, u.user_name, u.user_surname, u.email, s.pavadinimas, u.pareigos, u.vaidmuo FROM users u INNER JOIN skyriai s ON u.skyrius=s.id ORDER BY u.iraso_data DESC";
-
-try {
-    PreparedStatement pst = connection.prepareStatement(sql);
-    ResultSet rs=pst.executeQuery();
-    while (rs.next()) {
             %>
             <tbody>
             <tr class="item">
-                       
-	        	<td><%=rs.getString("u.id")%></td>
-                <td><%=rs.getString("u.login_name")%></td>
-                <td><%=rs.getString("u.user_name")%></td>
-                <td><%=rs.getString("u.user_surname")%></td>
-                <td><%=rs.getString("u.email")%></td>
-                <td><%=rs.getString("s.pavadinimas")%></td>
-                <td><%=rs.getString("u.pareigos")%></td>
-                <td><%=rs.getString("u.vaidmuo")%></td>
+
             </tr>
             </tbody>
-            <%
-                    }
-                    connection.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            %>
+            
             
             
             

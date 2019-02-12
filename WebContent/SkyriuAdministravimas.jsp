@@ -61,6 +61,8 @@ pavadinimas
 
 
 </div> 
+
+
 <div id="menuPunktasRedaguotiSkyriu">
  --| Redaguoti skyrių |--
  
@@ -75,42 +77,15 @@ pavadinimas
   	<th>Pavadinimas</th>
     <th>Statusas</th>
   </tr>
-  <%
+  <tr>
+  <td>aaa</td>
+  <td>bb</td>
+  <tr>
+    <td>aaa</td>
+  <td>bb</td>
 
 
-Class.forName("com.mysql.jdbc.Driver");
-  MySqlConnect mySqlConnect = new MySqlConnect();
-  Connection connection = mySqlConnect.getConnection();
 
-String sql = "select p.pavadinimas, s.statusas from skyriai p inner join statusas s on p.statusas=s.id ORDER BY p.pavadinimas";
-
-try {
-    PreparedStatement pst = connection.prepareStatement(sql);
-    ResultSet rs=pst.executeQuery();
-    while (rs.next()) {
-            %>
-            <tbody>
-            <tr class="item">
-                       
-	        	<td><%=rs.getString("p.pavadinimas")%></td>
-                <td><%=rs.getString("s.statusas")%></td>
-            </tr>
-            </tbody>
-            <%
-                    }
-                    connection.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            %>
-            
-            
-            
-            
-        </table>
- 
- 
- </div>
 
 
 

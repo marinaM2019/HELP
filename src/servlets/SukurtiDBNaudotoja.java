@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,13 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.NaujoNaudotojoSukurimas;
+import naudotojai.PateiktiDuomenys;
+import service.Naudotojai;
 
 @WebServlet("/SukurtiDBNaudotoja")
 public class SukurtiDBNaudotoja extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String userLoginName = request.getParameter("userLoginName").toLowerCase().trim();
 		String passw = request.getParameter("passw");
 		String passwConf = request.getParameter("passwConf");
@@ -25,20 +28,24 @@ public class SukurtiDBNaudotoja extends HttpServlet {
 		String userPareigos = request.getParameter("userPareigos");
 		String userVaidmuo = request.getParameter("userVaidmuo");
 		
-		if ((userLoginName.isEmpty() || userLoginName.length()>6) || 
-				(passw.isEmpty() || passw.length()>10 && (!(passw.equals(passwConf)))) ||
-				(userName.isEmpty() || userName.length()>110) ||
-				(userSurname.isEmpty() || userSurname.length()>110) ||
-				(email.isEmpty() || email.length()>240) ||
-				(userSkyrius.equals("-1") || userPareigos.equals("-1") || userVaidmuo.equals("-1")))
+		PateiktiDuomenys pateiktiDuomenys = new PateiktiDuomenys();
+		
+		if (pateiktiDuomenys.arTeisingi(userLoginName, email, userPareigos, passw, passwConf, userSkyrius, userSurname, userName, userVaidmuo))
 		{
-			System.out.println("KLAIDA: Nurodytos nevisos reik�m�s arba vir�ijamas leistinas simboli� skai�ius");
+			new Error().printStackTrace();
 			return;
 		} 
 		
 		
-		NaujoNaudotojoSukurimas naujoNaudotojoSukurimas = new NaujoNaudotojoSukurimas();
-		naujoNaudotojoSukurimas.sukurtiNaudotoja(userLoginName, passw, userName, userSurname, email, userSkyrius, userPareigos, userVaidmuo);
+		Naudotojai naudotojai = new Naudotojai();
+		try {
+			naudotojai.sukurtiNauja(userLoginName, passw, userName, userSurname, email, userSkyrius, userPareigos, userVaidmuo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		response.sendRedirect("Administravimas.jsp");
 	}
 

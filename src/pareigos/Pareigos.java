@@ -1,6 +1,6 @@
-package visosPareigos;
+package pareigos;
 
-public enum VisosPareigos {
+public enum Pareigos {
 	
 	Vedėjas, Vyriausiasis_specialistas, Vyresnysis_specialistas, Specialistas
 
