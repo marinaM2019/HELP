@@ -26,6 +26,19 @@ if(session.getAttribute("loginName")==null){
 </head>
 <body>
 <%@include file="SuperAdminMenu.jsp" %>
---| Suformuoti ataskaitą |--
+--| Suformuoti pateiktų gedimų |--
+<br>
+<form target="_blank" name="pateiktuGedAtaskaita" action="servlets/Ataskaita" method="post">
+Nuo:<br>
+<input type="date" name="dataNuo">
+<br>Iki<br>
+<input type="date" name="dataIki">
+<br>
+<input type="submit" value="Suformuoti">
+</form>
+
+
+
+
 </body>
 </html>

@@ -15,8 +15,8 @@ import lt.help.desk.bd.mySql.connection.MySqlConnect;
 
 public class Gedimai {
 
-	public void itraukti(String tema, String aprasymas, String gedimaPateike)
-			throws SQLException, ClassNotFoundException, FileNotFoundException, IOException {
+	public void itraukti(String tema, String aprasymas, String gedimaPateike) throws IOException
+			 {
 
 		Connection conn = MySqlConnect.getConnection();
 		String Sql = "INSERT  INTO gedimai (tema, aprasymas, gedima_pateike) VALUES (?, ?, ?)";
@@ -29,17 +29,11 @@ public class Gedimai {
 
 		} catch (Exception ee) {
 			throw new RuntimeException();
-		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				throw new RuntimeException();
-			}
-		}
+		} 
 	}
 
-	public List<Gedimas> gautiManoPateiktus(String loginName)
-			throws SQLException, ClassNotFoundException, FileNotFoundException, IOException {
+	public List<Gedimas> gautiManoPateiktus(String loginName) throws IOException
+			 {
 		List<Gedimas> sarasas = new ArrayList<>();
 		Connection connection = MySqlConnect.getConnection();
 		String sql = "SELECT iraso_data, tema, aprasymas, statusas, vykdytojas, vykdytojo_iraso_data FROM gedimai WHERE gedima_pateike=? ORDER BY iraso_data DESC";
@@ -59,12 +53,6 @@ public class Gedimai {
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException();
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new RuntimeException();
-			}
 		}
 		return sarasas;
 

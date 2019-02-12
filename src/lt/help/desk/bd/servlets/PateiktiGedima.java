@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import lt.help.desk.bd.gedimai.PatikrintiArTemaIrAprasymasPateikti;
+import lt.help.desk.bd.gedimai.PatikrintiDuArgumentus;
 import lt.help.desk.bd.service.Gedimai;
 
 /**
@@ -31,13 +31,13 @@ public class PateiktiGedima extends HttpServlet {
 		String gedimoTema = request.getParameter("gedimoTema").replace("_", " ");
 		String gedimoAprasymas = request.getParameter("gedimoAprasymas");
 
-		PatikrintiArTemaIrAprasymasPateikti patikrintiArTemaIrAprasymasPateikti = new PatikrintiArTemaIrAprasymasPateikti();
+		PatikrintiDuArgumentus patikrintiArTemaIrAprasymasPateikti = new PatikrintiDuArgumentus();
 
-		if (patikrintiArTemaIrAprasymasPateikti.patikrintiArgumentus(gedimoTema, gedimoAprasymas)) {
+		if (patikrintiArTemaIrAprasymasPateikti.arPateikti(gedimoTema, gedimoAprasymas)) {
 			try {
 				gedimai.itraukti(gedimoTema, gedimoAprasymas, loginName);
 				response.sendRedirect("Home.jsp");
-			} catch (SQLException | ClassNotFoundException e) {
+			} catch (Exception e) {
 				throw new RuntimeException();
 			} 
 		}

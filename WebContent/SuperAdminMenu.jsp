@@ -15,7 +15,7 @@
 <ul>
          <li><a href = "SukurtiNaudotoja.jsp">--| Sukurti naudotoją |--</a></li>
          <li><a href = "SkyriuAdministravimas.jsp">--| Sukurti skyriu |--</a></li>
-         <li><a href = "SuformuotiAtaskaita.jsp">--| Suformuoti ataskaitą |--</a></li>
+         <li><a href = "SuformuotiAtaskaita.jsp">--| Suformuoti pateiktų gedimų ataskaitą |--</a></li>
       </ul>
 
 </div>

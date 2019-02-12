@@ -1,4 +1,4 @@
-package lt.help.desk.bd.gedimai;
+package lt.help.desk.bd.servlets;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -16,6 +16,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.mysql.jdbc.PreparedStatement;
 
+import lt.help.desk.bd.gedimai.PatikrintiDuArgumentus;
 import lt.help.desk.bd.mySql.connection.MySqlConnect;
 
 import java.sql.Connection;
@@ -26,8 +27,8 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPTable;
 
-@WebServlet("/gedimai/ManoGedimai")
-public class ManoGedimai extends HttpServlet {
+@WebServlet("/servlets/Ataskaita")
+public class Ataskaita extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -35,8 +36,10 @@ public class ManoGedimai extends HttpServlet {
 		response.setContentType("application/pdf");
 		OutputStream out = response.getOutputStream();
 		HttpSession session = request.getSession(true);
-		String loginName = (String) session.getAttribute("loginName");
-
+		
+		String dataNuo = request.getAttribute("dataNuo").toString();
+		String dataIki = request.getAttribute("dataIki").toString();
+		
 		BaseFont lt = null;
 		try {
 			lt = BaseFont.createFont(BaseFont.TIMES_ROMAN, BaseFont.CP1257, BaseFont.EMBEDDED);
@@ -83,54 +86,14 @@ public class ManoGedimai extends HttpServlet {
 
 		paragraph.setAlignment(Element.ALIGN_CENTER);
 
-		paragraph.add(new Phrase("MANO REGISTRUOTŲ GEDIMŲ SĄRAŠAS".toUpperCase(), fontBold));
+		paragraph.add(new Phrase("GEDIMŲ SĄRAŠAS".toUpperCase(), fontBold));
 		paragraph2.add(new Phrase(" "));
 
-		Connection connectionPr;
-		try {
-			connectionPr = MySqlConnect.getConnection();
-			String sqlPr = "SELECT iraso_data, tema, aprasymas, statusas, vykdytojas, vykdytojo_iraso_data FROM gedimai WHERE gedima_pateike='"
-					+ loginName + "' ORDER BY iraso_data DESC";
-			PreparedStatement pst = (PreparedStatement) connectionPr.prepareStatement(sqlPr);
-			ResultSet rs = pst.executeQuery();
-			while (rs.next()) {
-				String data = rs.getString("iraso_data");
-				String tema = rs.getString("tema");
-				String aprasymas = rs.getString("aprasymas");
-				String statusas = rs.getString("statusas");
-				String vykdytojas = rs.getString("vykdytojas");
-				String vykdytojoIrasoData = rs.getString("vykdytojo_iraso_data");
+		
+		PatikrintiDuArgumentus patikrintiArgumentus = new PatikrintiDuArgumentus();
+		if (patikrintiArgumentus.arPateikti(dataNuo, dataIki)) {
 
-				table.addCell(new Paragraph(data, cellFont));
-				table.addCell(new Paragraph(tema, cellFont));
-				table.addCell(new Paragraph(aprasymas, cellFont));
-				if (statusas.equals("atmesta")) {
-					table.addCell(new Paragraph(statusas, cellFontColorRed));
-				} else if (statusas.equals("ivykdyta")) {
-					table.addCell(new Paragraph(statusas, cellFontColorGreen));
-				} else {
-					table.addCell(new Paragraph(statusas, cellFont));
-				}
-				table.addCell(new Paragraph(vykdytojas, cellFont));
-				table.addCell(new Paragraph(vykdytojoIrasoData, cellFont));
-
-			}
-			// connectionPr.close();
-
-		} catch (ClassNotFoundException | SQLException e2) {
-			throw new RuntimeException();
-		} 
-
-		try {
-			document.add(paragraph);
-			document.add(paragraph2);
-			document.add(table);
-		} catch (DocumentException e1) {
-			throw new RuntimeException();
 		}
-
-		document.close();
-
 	}
 
 }
