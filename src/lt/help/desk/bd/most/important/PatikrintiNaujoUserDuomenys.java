@@ -1,8 +1,8 @@
-package lt.help.desk.bd.naudotojai;
+package lt.help.desk.bd.most.important;
 
 
 
-public class PateiktiDuomenys {
+public class PatikrintiNaujoUserDuomenys {
 	
 //	private static int LOGIN_NAME_MAX_SIMBOLIU=6;
 	private static int PASSWORD_MAX_SIMBOLIU=10;
