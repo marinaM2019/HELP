@@ -31,7 +31,7 @@ public class SukurtiDBNaudotoja extends HttpServlet {
 
 		PateiktiDuomenys pateiktiDuomenys = new PateiktiDuomenys();
 
-		if (pateiktiDuomenys.arTeisingi(userLoginName, email, userPareigos, passw, passwConf, userSkyrius, userSurname,
+		if (pateiktiDuomenys.uzpildytiNeVisi(userLoginName, email, userPareigos, passw, passwConf, userSkyrius, userSurname,
 				userName, userVaidmuo)) {		
 				throw new RuntimeException();
 		}

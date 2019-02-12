@@ -10,27 +10,44 @@ import lt.help.desk.bd.naudotojai.PatikrintiUserName;
 import lt.help.desk.bd.naudotojai.PatikrintiVaidmeni;
 
 public class PateiktiDuomenys {
-	PatikrintiLoginName logN = new PatikrintiLoginName();
-	PatikrintiMail ma = new PatikrintiMail();
-	PatikrintiPareigos pareig = new PatikrintiPareigos();
-	PatikrintiPassw passw = new PatikrintiPassw();
-	PatikrintiSkyriu skyr = new PatikrintiSkyriu();
-	PatikrintiSurname surn = new PatikrintiSurname();
-	PatikrintiUserName userNam = new PatikrintiUserName();
-	PatikrintiVaidmeni vaidm = new PatikrintiVaidmeni();
-
-	public boolean arTeisingi(String loginName, String email, String pareigos, String pasw1, String pasw2,
-			String skyrius, String surname, String userName, String vaidmuo) {
-		if (logN.patikrintiVienoArgumentoReiksme(loginName) && ma.patikrintiVienoArgumentoReiksme(email)
-				&& pareig.patikrintiVienoArgumentoReiksme(pareigos)
-				&& passw.patikrintiDvejuArgumentuReiksmes(pasw1, pasw2) && skyr.patikrintiVienoArgumentoReiksme(skyrius)
-				&& surn.patikrintiVienoArgumentoReiksme(surname) && userNam.patikrintiVienoArgumentoReiksme(userName)
-				&& vaidm.patikrintiVienoArgumentoReiksme(vaidmuo)) {
+	
+//	private static int LOGIN_NAME_MAX_SIMBOLIU=6;
+	private static int PASSWORD_MAX_SIMBOLIU=10;
+//	private static int USER_NAME_MAX_SIMBOLIU=110;
+//	private static int SURNAME_MAX_SIMBOLIU=110;
+//	private static int MAIL_MAX_SIMBOLIU=240;
+//	
+	
+	
+	private boolean arIrasytaArgumentoReiksme(String reiksme) {
+		if (reiksme.isEmpty()) {
 			return false;
 		}
-
 		return true;
+	}
+	
+	private boolean arSlaptazodisSutampa(String pasw, String confPasw) {
+		if (pasw.isEmpty() || pasw.length()>PASSWORD_MAX_SIMBOLIU || (!(pasw.equals(confPasw)))) {
+			return false;
+		}
+		return true;
+	}
 
+	
+
+
+	public boolean uzpildytiNeVisi(String userLoginName, String email, String userPareigos, String passw, String passwConf, String userSkyrius, String userSurname,
+			String userName, String userVaidmuo) {
+		if (arIrasytaArgumentoReiksme(userLoginName) || 
+				arIrasytaArgumentoReiksme(email) ||
+				arIrasytaArgumentoReiksme(userPareigos) ||
+				arSlaptazodisSutampa(passw, passwConf) ||
+				arIrasytaArgumentoReiksme(userSkyrius) ||
+				arIrasytaArgumentoReiksme(userSurname)
+				) {
+			return false;
+		}
+		return true;
 	}
 
 }

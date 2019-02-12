@@ -10,34 +10,74 @@ public class Patikrinti {
 	
 	
 	
-	private boolean vienoArgumentoReiksme(String reiksme) {
-		if (reiksme.isEmpty()) {
-			return false;
+	private boolean arIrasytaArgumentoReiksme(String reiksme) {
+		if (!reiksme.isEmpty()) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	
 	
-
 	
-	
-	
-	
-	public boolean patikrintiLoginName (String loginName) {
-		return vienoArgumentoReiksme(loginName);
+	public boolean arLoginNameIrasyta (String loginName) {
+		if(arIrasytaArgumentoReiksme(loginName)){
+			return true;
+		} return false;
 	}
 	
-	public boolean patikrintiMail (String mail) {
-		return vienoArgumentoReiksme(mail);
+	public boolean arMailIrasytas (String mail) {
+		if(arIrasytaArgumentoReiksme(mail)){
+			return true;
+		} return false;
 	}
 	
-	public boolean dvejuArgumentuReiksme(String pasw, String paswConf) {
+	public boolean arPareigosPasirinktos (String pareigos) {
+		if(arIrasytaArgumentoReiksme(pareigos)){
+			return true;
+		} return false;
+	}
+	
+	public boolean arSlaptazodisSutampa (String pasw, String paswConf) {
 		if (pasw.isEmpty() || (pasw.length() > PASSWORD_MAX_SIMBOLIU && (!(pasw.equals(paswConf))))) {
 			return false;
 		}
 		return true;
 	}
+	
+	public boolean arSkyriusPasirinktas (String skyrius) {
+		if(arIrasytaArgumentoReiksme(skyrius)){
+			return true;
+		} return false;
+	}
+	
+	public boolean arSurnameIrasyta (String surname) {
+		if(arIrasytaArgumentoReiksme(surname)){
+			return true;
+		} return false;
+	}
+	
+	public boolean arUserNameIrasyta (String userName) {
+		if(arIrasytaArgumentoReiksme(userName)){
+			return true;
+		} return false;
+	}
+	
+	public boolean arVaidmuoPasirinktas (String vaidmuo) {
+		if(arIrasytaArgumentoReiksme(vaidmuo)){
+			return true;
+		} return false;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
