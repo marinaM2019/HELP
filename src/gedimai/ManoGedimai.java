@@ -96,7 +96,7 @@ public class ManoGedimai extends HttpServlet {
 		Connection connectionPr = null;
 		try {
 			connectionPr = (Connection) DriverManager.getConnection(
-					"jdbc:mysql://192.168.200.7/help_desk?autoReconnect=true&useSSL=false", "admin", "help1111");
+					"jdbc:mysql://192.168.115.156/help_desk?autoReconnect=true&useSSL=false", "admin", "help1111");
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

@@ -29,9 +29,7 @@ public class LoginUserFromMySql{
 	        } 
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
-	    } finally {
-	    	connection.close();
-	    }
+	    } 
 	    return false;
 	}
 
@@ -46,9 +44,7 @@ public class LoginUserFromMySql{
 	        } 
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
-	    } finally {
-	    	connection.close();
-	    }
+	    } 
 	    return false;
 	}
 	
@@ -63,9 +59,7 @@ public class LoginUserFromMySql{
 	        } 
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
-	    } finally {
-	    	connection.close();
-	    }
+	    } 
 	    return false;
 	}
 
@@ -80,9 +74,7 @@ public class LoginUserFromMySql{
 	        } 
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
-	    } finally {
-	    	connection.close();
-	    }
+	    } 
 	    return false;
 	}
 	
@@ -104,9 +96,7 @@ public class LoginUserFromMySql{
 	        } 
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
-	    } finally {
-	    	connection.close();
-	    }
+	    } 
 	    return atributuSarasas;
 	}
 	
