@@ -41,10 +41,11 @@ public class MySqlConnect {
 	                con = DriverManager.getConnection( host, username, password );
 	            } catch (SQLException ex) {
 	                Logger.getLogger(MySqlConnect.class.getName()).log(Level.SEVERE, null, ex);
-	            } finally {
-	                if(con != null)
-	                    con.close();
 	            }
+//	            finally {
+//	                if(con != null)
+//	                    con.close();
+//	            }
 	        }
 
 	        return con;
