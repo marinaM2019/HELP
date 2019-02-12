@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lt.help.desk.bd.naudotojai.PateiktiDuomenys;
+import lt.help.desk.bd.most.important.PatikrintiNaujoUserDuomenys;
 import lt.help.desk.bd.service.Naudotojai;
 
 @WebServlet("/SukurtiDBNaudotoja")
@@ -29,9 +29,9 @@ public class SukurtiDBNaudotoja extends HttpServlet {
 		String userPareigos = request.getParameter("userPareigos");
 		String userVaidmuo = request.getParameter("userVaidmuo");
 
-		PateiktiDuomenys pateiktiDuomenys = new PateiktiDuomenys();
+		PatikrintiNaujoUserDuomenys atikrintiNaujoUserDuomenys = new PatikrintiNaujoUserDuomenys();
 
-		if (pateiktiDuomenys.uzpildytiNeVisi(userLoginName, email, userPareigos, passw, passwConf, userSkyrius, userSurname,
+		if (atikrintiNaujoUserDuomenys.uzpildytiNeVisi(userLoginName, email, userPareigos, passw, passwConf, userSkyrius, userSurname,
 				userName, userVaidmuo)) {		
 				throw new RuntimeException();
 		}

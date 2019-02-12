@@ -2,17 +2,21 @@ package lt.help.desk.bd.mySql.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.Resource;
+import org.apache.commons.io.FileUtils;
+
 
 public class MySqlConnect {
 	
@@ -27,8 +31,10 @@ public class MySqlConnect {
 
 	private MySqlConnect() {}
 
-	public static Connection getConnection() {
+	public static Connection getConnection() throws IOException {
 
+		
+		
 		
 		if (con == null ) {
 			try {
