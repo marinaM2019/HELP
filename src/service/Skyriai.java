@@ -30,6 +30,8 @@ public class Skyriai{
 	        }
 	    } catch (SQLException e) {
 	    	sarasas.add(null);
+	    } finally {
+	    	connection.close();
 	    }
 	    return sarasas;
 	    
@@ -49,12 +51,8 @@ public class Skyriai{
 		    } catch (Exception ee){
 		    	System.out.println(ee);
 		    }finally {
-		    	try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-		    	}
+		    	conn.close();
+		    }
 		}
 		
 		
