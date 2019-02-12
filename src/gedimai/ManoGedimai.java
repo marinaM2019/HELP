@@ -2,7 +2,6 @@ package gedimai;
 
 import java.io.IOException;
 import java.io.OutputStream;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +15,8 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.mysql.jdbc.PreparedStatement;
-
 import mySql.connection.MySqlConnect;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.itextpdf.text.DocumentException;
