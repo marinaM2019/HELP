@@ -1,13 +1,6 @@
 package lt.help.desk.bd.naudotojai;
 
-import lt.help.desk.bd.naudotojai.PatikrintiLoginName;
-import lt.help.desk.bd.naudotojai.PatikrintiMail;
-import lt.help.desk.bd.naudotojai.PatikrintiPareigos;
-import lt.help.desk.bd.naudotojai.PatikrintiPassw;
-import lt.help.desk.bd.naudotojai.PatikrintiSkyriu;
-import lt.help.desk.bd.naudotojai.PatikrintiSurname;
-import lt.help.desk.bd.naudotojai.PatikrintiUserName;
-import lt.help.desk.bd.naudotojai.PatikrintiVaidmeni;
+
 
 public class PateiktiDuomenys {
 	
