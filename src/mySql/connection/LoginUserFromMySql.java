@@ -26,11 +26,11 @@ public class LoginUserFromMySql{
 	        ResultSet rs = pst.executeQuery();
 	        if (rs.next()) {
 	            return true;
-	        } connection.close();
+	        } 
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
 	    } finally {
-	    	new Error().printStackTrace();
+	    	connection.close();
 	    }
 	    return false;
 	}
@@ -43,11 +43,11 @@ public class LoginUserFromMySql{
 	        ResultSet rs = pst.executeQuery();
 	        if (rs.next()) {
 	            return true;
-	        } connection.close();
+	        } 
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
 	    } finally {
-	    	new Error().printStackTrace();
+	    	connection.close();
 	    }
 	    return false;
 	}
@@ -60,11 +60,11 @@ public class LoginUserFromMySql{
 	        ResultSet rs = pst.executeQuery();
 	        if (rs.next()) {
 	            return true;
-	        } connection.close();
+	        } 
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
 	    } finally {
-	    	new Error().printStackTrace();
+	    	connection.close();
 	    }
 	    return false;
 	}
@@ -77,11 +77,11 @@ public class LoginUserFromMySql{
 	        ResultSet rs = pst.executeQuery();
 	        if (rs.next()) {
 	            return true;
-	        } connection.close();
+	        } 
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
 	    } finally {
-	    	new Error().printStackTrace();
+	    	connection.close();
 	    }
 	    return false;
 	}
@@ -101,11 +101,11 @@ public class LoginUserFromMySql{
 	        	String skyrius = rs.getString("skyrius");
 	        	String pareigos = rs.getString("pareigos");
 	        	atributuSarasas.add(new LoginUserAtribute (name, surname, skyrius, pareigos));
-	        } connection.close();
+	        } 
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
 	    } finally {
-	    	new Error().printStackTrace();
+	    	connection.close();
 	    }
 	    return atributuSarasas;
 	}
