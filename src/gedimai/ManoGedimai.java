@@ -15,8 +15,11 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+
+import mySql.connection.MySqlConnect;
+
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -87,25 +90,11 @@ public class ManoGedimai extends HttpServlet {
 		paragraph.add(new Phrase("MANO REGISTRUOTŲ GEDIMŲ SĄRAŠAS".toUpperCase(), fontBold));
 		paragraph2.add(new Phrase(" "));
 
+		Connection connectionPr;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		Connection connectionPr = null;
-		try {
-			connectionPr = (Connection) DriverManager.getConnection(
-					"jdbc:mysql://192.168.115.156/help_desk?autoReconnect=true&useSSL=false", "admin", "help1111");
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		String sqlPr = "SELECT iraso_data, tema, aprasymas, statusas, vykdytojas, vykdytojo_iraso_data FROM gedimai WHERE gedima_pateike='"
-				+ loginName + "' ORDER BY iraso_data DESC";
-
-		try {
+			connectionPr = MySqlConnect.getInstance().getConnection();
+			String sqlPr = "SELECT iraso_data, tema, aprasymas, statusas, vykdytojas, vykdytojo_iraso_data FROM gedimai WHERE gedima_pateike='"
+					+ loginName + "' ORDER BY iraso_data DESC";
 			PreparedStatement pst = (PreparedStatement) connectionPr.prepareStatement(sqlPr);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
@@ -130,10 +119,23 @@ public class ManoGedimai extends HttpServlet {
 				table.addCell(new Paragraph(vykdytojoIrasoData, cellFont));
 
 			}
-			connectionPr.close();
-		} catch (Exception e) {
-
+			//connectionPr.close();
+		
+		
+		
+		
+		
+		} catch (ClassNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
+
+
+
+
 
 		try {
 			document.add(paragraph);
