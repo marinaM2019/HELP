@@ -8,7 +8,7 @@ public class LoginData {
 
 	public boolean getLoginFromDB(String loginName, String password) {
 		try {
-			Connection connectToDb = MySqlConnect.getInstance().getConnection();
+			Connection connectToDb = MySqlConnect.getConnection();
 			if (connectToDb != null) {
 				return true;
 			}

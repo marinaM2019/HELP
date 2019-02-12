@@ -34,50 +34,36 @@ public class LoginAction extends HttpServlet {
 
 		try {
 			if (loginUserFromMySql.getSuperAdminLogin(loginName, loginPassword)) {
-				try {
-					response.sendRedirect("Administravimas.jsp");
-					session.setAttribute("loginName", loginName);
-					session.setAttribute("name", "super administratorius");
-					session.setAttribute("surname", "");
-					session.setAttribute("skyrius", "");
-					session.setAttribute("pareigos", "");
-				} catch (Exception e) {
-					session.setAttribute("surname", "");
-					session.setAttribute("skyrius", "");
-					session.setAttribute("pareigos", "");
-				}
-				return;
+
+				response.sendRedirect("Administravimas.jsp");
+				session.setAttribute("loginName", loginName);
+				session.setAttribute("name", "super administratorius");
+				session.setAttribute("surname", "");
+				session.setAttribute("skyrius", "");
+				session.setAttribute("pareigos", "");
+
+				session.setAttribute("surname", "");
+				session.setAttribute("skyrius", "");
+				session.setAttribute("pareigos", "");
+
 			} else
-				try {
-					if (loginUserFromMySql.getBossConnection(loginName, loginPassword)) {
-						response.sendRedirect("Boss.jsp");
-					} else
-						try {
-							if (loginUserFromMySql.getLocalAdminConnection(loginName, loginPassword)) {
-								response.sendRedirect("LocalAdmin.jsp");
-							} else
-								try {
-									if (loginUserFromMySql.getUserConnection(loginName, loginPassword)) {
-										response.sendRedirect("Home.jsp");
-									} else {
-										response.sendRedirect("BadLogin.jsp");
-										return;
-									}
-								} catch (SQLException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		} catch (SQLException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			if (loginUserFromMySql.getBossConnection(loginName, loginPassword)) {
+				response.sendRedirect("Boss.jsp");
+			} else
+
+			if (loginUserFromMySql.getLocalAdminConnection(loginName, loginPassword)) {
+				response.sendRedirect("LocalAdmin.jsp");
+			} else
+
+			if (loginUserFromMySql.getUserConnection(loginName, loginPassword)) {
+				response.sendRedirect("Home.jsp");
+			} else {
+				response.sendRedirect("BadLogin.jsp");
+				return;
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new RuntimeException();
 		}
 
 		session.setAttribute("loginName", loginName);

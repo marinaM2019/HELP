@@ -37,13 +37,9 @@ public class PateiktiGedima extends HttpServlet {
 			try {
 				gedimai.itraukti(gedimoTema, gedimoAprasymas, loginName);
 				response.sendRedirect("Home.jsp");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} catch (SQLException | ClassNotFoundException e) {
+				throw new RuntimeException();
+			} 
 		}
 	}
 

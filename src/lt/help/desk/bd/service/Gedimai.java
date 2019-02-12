@@ -18,7 +18,7 @@ public class Gedimai {
 	public void itraukti(String tema, String aprasymas, String gedimaPateike)
 			throws SQLException, ClassNotFoundException, FileNotFoundException, IOException {
 
-		Connection conn = MySqlConnect.getInstance().getConnection();
+		Connection conn = MySqlConnect.getConnection();
 		String Sql = "INSERT  INTO gedimai (tema, aprasymas, gedima_pateike) VALUES (?, ?, ?)";
 		try {
 			PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
@@ -28,12 +28,12 @@ public class Gedimai {
 			pst.executeUpdate();
 
 		} catch (Exception ee) {
-			System.out.println(ee);
+			throw new RuntimeException();
 		} finally {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new RuntimeException();
 			}
 		}
 	}
@@ -41,7 +41,7 @@ public class Gedimai {
 	public List<Gedimas> gautiManoPateiktus(String loginName)
 			throws SQLException, ClassNotFoundException, FileNotFoundException, IOException {
 		List<Gedimas> sarasas = new ArrayList<>();
-		Connection connection = MySqlConnect.getInstance().getConnection();
+		Connection connection = MySqlConnect.getConnection();
 		String sql = "SELECT iraso_data, tema, aprasymas, statusas, vykdytojas, vykdytojo_iraso_data FROM gedimai WHERE gedima_pateike=? ORDER BY iraso_data DESC";
 		try {
 			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
@@ -58,12 +58,12 @@ public class Gedimai {
 
 			}
 		} catch (SQLException e) {
-			sarasas.add(null);
+			throw new RuntimeException();
 		} finally {
 			try {
 				connection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new RuntimeException();
 			}
 		}
 		return sarasas;

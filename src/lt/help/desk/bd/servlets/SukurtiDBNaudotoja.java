@@ -32,21 +32,19 @@ public class SukurtiDBNaudotoja extends HttpServlet {
 		PateiktiDuomenys pateiktiDuomenys = new PateiktiDuomenys();
 
 		if (pateiktiDuomenys.arTeisingi(userLoginName, email, userPareigos, passw, passwConf, userSkyrius, userSurname,
-				userName, userVaidmuo)) {
-			new Error().printStackTrace();
-			return;
+				userName, userVaidmuo)) {		
+				throw new RuntimeException();
 		}
 
 		Naudotojai naudotojai = new Naudotojai();
-		try {
-			naudotojai.sukurtiNauja(userLoginName, passw, userName, userSurname, email, userSkyrius, userPareigos,
-					userVaidmuo);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+			try {
+				naudotojai.sukurtiNauja(userLoginName, passw, userName, userSurname, email, userSkyrius, userPareigos,
+						userVaidmuo);
+			} catch (ClassNotFoundException | SQLException e) {
+				throw new RuntimeException();
+			}
+		
 		response.sendRedirect("Administravimas.jsp");
 	}
 

@@ -18,7 +18,7 @@ public class Naudotojai {
 	public List<Naudotojas> gautiNaudotojuSarasa()
 			throws SQLException, ClassNotFoundException, FileNotFoundException, IOException {
 		List<Naudotojas> sarasas = new ArrayList<>();
-		Connection connection = MySqlConnect.getInstance().getConnection();
+		Connection connection = MySqlConnect.getConnection();
 
 		String sql = "SELECT u.id, u.login_name, u.user_name, u.user_surname, u.email, s.pavadinimas, u.pareigos, u.vaidmuo FROM users u INNER JOIN skyriai s ON u.skyrius=s.id ORDER BY u.id";
 		try {
@@ -38,12 +38,12 @@ public class Naudotojai {
 
 			}
 		} catch (SQLException e) {
-			sarasas.add(null);
+				throw new RuntimeException();
 		} finally {
 			try {
 				connection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new RuntimeException();
 			}
 		}
 		return sarasas;
@@ -53,7 +53,7 @@ public class Naudotojai {
 	public void sukurtiNauja(String loginName, String passwordas, String userName, String userSurname, String email,
 			String skyrius, String pareigos, String vaidmuo)
 			throws SQLException, ClassNotFoundException, FileNotFoundException, IOException {
-		Connection conn = MySqlConnect.getInstance().getConnection();
+		Connection conn = MySqlConnect.getConnection();
 		String Sql = "INSERT  INTO users (login_name, passw, user_name, user_surname, email, skyrius, pareigos, vaidmuo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
@@ -68,12 +68,12 @@ public class Naudotojai {
 			pst.executeUpdate();
 
 		} catch (Exception ee) {
-			System.out.println(ee);
+			throw new RuntimeException();
 		} finally {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new RuntimeException();
 			}
 		}
 	}

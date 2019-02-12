@@ -58,8 +58,7 @@ public class ManoGedimai extends HttpServlet {
 		try {
 			PdfWriter.getInstance(document, out);
 		} catch (DocumentException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			throw new RuntimeException();
 		}
 
 		document.open();
@@ -69,8 +68,7 @@ public class ManoGedimai extends HttpServlet {
 		try {
 			table.setWidths(new float[] { 2.0F, 1.0F, 2.0F, 1.0F, 2.0F, 2.0F });
 		} catch (DocumentException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			throw new RuntimeException();
 		}
 
 		table.addCell(new Phrase("Pateikimo data", cellFont));
@@ -90,7 +88,7 @@ public class ManoGedimai extends HttpServlet {
 
 		Connection connectionPr;
 		try {
-			connectionPr = MySqlConnect.getInstance().getConnection();
+			connectionPr = MySqlConnect.getConnection();
 			String sqlPr = "SELECT iraso_data, tema, aprasymas, statusas, vykdytojas, vykdytojo_iraso_data FROM gedimai WHERE gedima_pateike='"
 					+ loginName + "' ORDER BY iraso_data DESC";
 			PreparedStatement pst = (PreparedStatement) connectionPr.prepareStatement(sqlPr);
@@ -119,21 +117,16 @@ public class ManoGedimai extends HttpServlet {
 			}
 			// connectionPr.close();
 
-		} catch (ClassNotFoundException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		} catch (ClassNotFoundException | SQLException e2) {
+			throw new RuntimeException();
+		} 
 
 		try {
 			document.add(paragraph);
 			document.add(paragraph2);
 			document.add(table);
 		} catch (DocumentException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			throw new RuntimeException();
 		}
 
 		document.close();
