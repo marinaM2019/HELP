@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%@ page import = "vaidmenys.Vaidmuo" %>
-        <%@ page import = "pareigos.Pareigos" %>
-        <%@ page import = "service.Skyriai" %>
+        <%@ page import = "lt.help.desk.bd.klasifikatoriai.Vaidmenys" %>
+        <%@ page import = "lt.help.desk.bd.klasifikatoriai.Pareigos" %>
+        <%@ page import = "lt.help.desk.bd.service.Skyriai" %>
         <%@ page import="java.sql.Connection" %> 
 <%@ page import="java.sql.PreparedStatement" %> 
 <%@ page import="java.sql.ResultSet" %> 
 <%@ page import="javax.xml.XMLConstants" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.sql.DriverManager" %>
-<%@ page import="mySql.connection.MySqlConnect" %>
+<%@ page import="lt.help.desk.bd.mySql.connection.MySqlConnect" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="Style.css"/>
 
 <%
-	Vaidmuo vaidmuo = new Vaidmuo();
+
 Skyriai skyriai = new Skyriai();
 
 String username=String.valueOf(session.getAttribute("loginName"));
@@ -86,8 +86,8 @@ Pareigos:
 Vaidmuo:
 <select class="inputas" name="userVaidmuo">
 <option value="-1">Pasirinkite</option>
-<option value="<%= vaidmuo.getVaidmuo().darbuotojas_it %>"><%= vaidmuo.getVaidmuo().darbuotojas_it %></option>
-<option value="<%= vaidmuo.getVaidmuo().user %>"><%= vaidmuo.getVaidmuo().user %></option>
+<option value="<%= Vaidmenys.darbuotojas_it %>"><%= Vaidmenys.darbuotojas_it %></option>
+<option value="<%= Vaidmenys.user %>"><%= Vaidmenys.user %></option>
 </select>
 <div id="btnSukurtiNaudotoja">
 <input type="submit" value="Sukurti">

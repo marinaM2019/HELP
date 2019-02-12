@@ -1,4 +1,4 @@
-<%@page import="gedimai.GedimuRusys"%>
+<%@page import="lt.help.desk.bd.klasifikatoriai.GedimuRusys"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 

@@ -1,13 +1,12 @@
+<%@page import="lt.help.desk.bd.klasifikatoriai.Statusai"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%@ page import = "statusai.Statusas" %>
             <%@ page import="java.sql.Connection" %> 
 <%@ page import="java.sql.PreparedStatement" %> 
 <%@ page import="java.sql.ResultSet" %> 
         <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.sql.DriverManager" %>
-<%@ page import="mySql.connection.MySqlConnect" %>
-<%@ page import="statusai.Statusas" %>
+<%@ page import="lt.help.desk.bd.mySql.connection.MySqlConnect" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,8 +15,6 @@
 <link rel="stylesheet" href="Style.css"/>
 
 <%
-Statusas statusas = new Statusas();
-
 String username=String.valueOf(session.getAttribute("loginName"));
 
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -48,8 +45,8 @@ pavadinimas
 
 <select class="inputas" name="skyriausStatusas">
 <option value="-1">Pasirinkite</option>
-<option value="1"><%= statusas.getStatusas().active %></option>
-<option value="2"><%= statusas.getStatusas().diactive %></option>
+<option value="1"><%= Statusai.active %></option>
+<option value="2"><%= Statusai.diactive %></option>
 </select>
 
 <div id="btnSukurtiNaudotoja">
