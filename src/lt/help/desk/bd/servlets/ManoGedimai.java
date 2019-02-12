@@ -26,7 +26,7 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPTable;
 
-@WebServlet("/gedimai/ManoGedimai")
+@WebServlet("/ManoGedimai")
 public class ManoGedimai extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -57,5 +57,34 @@ public class Gedimai {
 		return sarasas;
 
 	}
+	
+	
+	
+	
+	public List<Gedimas> gautiVisusPateiktus(String dataNuo, String dataIki) throws IOException
+	 {
+List<Gedimas> sarasas = new ArrayList<>();
+Connection connection = MySqlConnect.getConnection();
+String sql = "select * from gedimai where (iraso_data BETWEEN '"+dataNuo+"' AND '"+dataIki+"')";
+try {
+	PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
+	ResultSet rs = pst.executeQuery();
+	while (rs.next()) {
+		String irasoData = rs.getString("iraso_data");
+		String tema = rs.getString("tema");
+		String aprasymas = rs.getString("aprasymas");
+		String statusas = rs.getString("statusas");
+		String vykdytojas = rs.getString("vykdytojas");
+		String vykdytojoIrasoData = rs.getString("vykdytojo_iraso_data");
+
+		sarasas.add(new Gedimas(irasoData, tema, aprasymas, statusas, vykdytojas, vykdytojoIrasoData));
+
+	}
+} catch (SQLException e) {
+	throw new RuntimeException();
+}
+return sarasas;
+
+}
 
 }

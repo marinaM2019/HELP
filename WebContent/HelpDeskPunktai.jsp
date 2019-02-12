@@ -25,7 +25,7 @@
 <br>
 
 
-<form target="_blank" name="report" action="gedimai/ManoGedimai" method="post">
+<form target="_blank" name="report" action="/gedimai/ManoGedimai" method="post">
 <input type="submit" class="button button3" value="Mano pateikti gedimai">
 </form>
 <br><br>

@@ -18,10 +18,15 @@ import com.mysql.jdbc.PreparedStatement;
 
 import lt.help.desk.bd.gedimai.PatikrintiDuArgumentus;
 import lt.help.desk.bd.mySql.connection.MySqlConnect;
+import lt.help.desk.bd.service.Gedimai;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.BaseFont;
@@ -31,14 +36,23 @@ import com.itextpdf.text.pdf.PdfPTable;
 public class Ataskaita extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	Gedimai gedimai = new Gedimai();
+	PatikrintiDuArgumentus patikrintiDuArgumentus = new PatikrintiDuArgumentus();
+	
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/pdf");
 		OutputStream out = response.getOutputStream();
 		HttpSession session = request.getSession(true);
+		String dataNuo = request.getParameter("dataNuo");
+		String dataIki = request.getParameter("dataIki");
+
+		DateFormat formatter;
+		Date date;
+		formatter = new SimpleDateFormat("dd-MMM-yy");
 		
-		String dataNuo = request.getAttribute("dataNuo").toString();
-		String dataIki = request.getAttribute("dataIki").toString();
 		
 		BaseFont lt = null;
 		try {
@@ -64,7 +78,7 @@ public class Ataskaita extends HttpServlet {
 			throw new RuntimeException();
 		}
 
-		document.open();
+		
 
 		PdfPTable table = new PdfPTable(6);
 		table.setWidthPercentage(100.0F);
@@ -89,11 +103,54 @@ public class Ataskaita extends HttpServlet {
 		paragraph.add(new Phrase("GEDIMŲ SĄRAŠAS".toUpperCase(), fontBold));
 		paragraph2.add(new Phrase(" "));
 
-		
-		PatikrintiDuArgumentus patikrintiArgumentus = new PatikrintiDuArgumentus();
-		if (patikrintiArgumentus.arPateikti(dataNuo, dataIki)) {
+		Connection connectionPr;
+		try {
+			connectionPr = MySqlConnect.getConnection();
+			if (patikrintiDuArgumentus.arPateikti(dataNuo, dataIki)) {
+				document.open();
+			
+			String sqlPr = "select * from gedimai where (iraso_data BETWEEN '"+dataNuo+"' AND '"+dataIki+"')";
+			PreparedStatement pst = (PreparedStatement) connectionPr.prepareStatement(sqlPr);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				String data = rs.getString("iraso_data");
+				String tema = rs.getString("tema");
+				String aprasymas = rs.getString("aprasymas");
+				String statusas = rs.getString("statusas");
+				String vykdytojas = rs.getString("vykdytojas");
+				String vykdytojoIrasoData = rs.getString("vykdytojo_iraso_data");
 
+				table.addCell(new Paragraph(data, cellFont));
+				table.addCell(new Paragraph(tema, cellFont));
+				table.addCell(new Paragraph(aprasymas, cellFont));
+				if (statusas.equals("atmesta")) {
+					table.addCell(new Paragraph(statusas, cellFontColorRed));
+				} else if (statusas.equals("ivykdyta")) {
+					table.addCell(new Paragraph(statusas, cellFontColorGreen));
+				} else {
+					table.addCell(new Paragraph(statusas, cellFont));
+				}
+				table.addCell(new Paragraph(vykdytojas, cellFont));
+				table.addCell(new Paragraph(vykdytojoIrasoData, cellFont));
+
+			}
+			}
+		
+
+		} catch (SQLException e2) {
+			throw new RuntimeException();
+		} 
+
+		try {
+			document.add(paragraph);
+			document.add(paragraph2);
+			document.add(table);
+		} catch (DocumentException e1) {
+			throw new RuntimeException();
 		}
+
+		document.close();
+
 	}
 
 }
