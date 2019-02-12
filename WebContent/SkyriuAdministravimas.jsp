@@ -61,25 +61,6 @@ pavadinimas
 
 
 <div id="menuPunktasRedaguotiSkyriu">
- --| Redaguoti skyrių |--
- 
- 
- <table id="lentele">
-<colgroup>
-	<col style="width:70%">
-    <col style="width:30%">
-  </colgroup> 
-  <thead>
-  <tr >
-  	<th>Pavadinimas</th>
-    <th>Statusas</th>
-  </tr>
-  <tr>
-  <td>aaa</td>
-  <td>bb</td>
-  <tr>
-    <td>aaa</td>
-  <td>bb</td>
 
 
 
