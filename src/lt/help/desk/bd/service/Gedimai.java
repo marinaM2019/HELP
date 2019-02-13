@@ -11,80 +11,67 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import lt.help.desk.bd.beans.Gedimas;
+import lt.help.desk.bd.beans.Naudotojas;
 import lt.help.desk.bd.mySql.connection.MySqlConnect;
 
 public class Gedimai {
-
-	public void itraukti(String tema, String aprasymas, String gedimaPateike) throws IOException
-			 {
-
+	
+	
+	public void itraukti(String gedimoTema, String gedimoAprasymas, String loginName)
+			throws SQLException, ClassNotFoundException, FileNotFoundException, IOException {
 		Connection conn = MySqlConnect.getConnection();
 		String Sql = "INSERT  INTO gedimai (tema, aprasymas, gedima_pateike) VALUES (?, ?, ?)";
 		try {
 			PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
-			pst.setString(1, tema);
-			pst.setString(2, aprasymas);
-			pst.setString(3, gedimaPateike);
+			pst.setString(1, gedimoTema);
+			pst.setString(2, gedimoAprasymas);
+			pst.setString(3, loginName);
 			pst.executeUpdate();
 
 		} catch (Exception ee) {
 			throw new RuntimeException();
-		} 
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				throw new RuntimeException();
+			}
+		}
 	}
-
-	public List<Gedimas> gautiManoPateiktus(String loginName) throws IOException
-			 {
+	
+	
+	
+	
+	
+	public List<Gedimas> gautiNepaskirtus()
+			throws SQLException, ClassNotFoundException, FileNotFoundException, IOException {
 		List<Gedimas> sarasas = new ArrayList<>();
 		Connection connection = MySqlConnect.getConnection();
-		String sql = "SELECT iraso_data, tema, aprasymas, statusas, vykdytojas, vykdytojo_iraso_data FROM gedimai WHERE gedima_pateike=? ORDER BY iraso_data DESC";
+
+		String sql = "SELECT iraso_data, tema, aprasymas, gedima_pateike, statusas FROM gedimai WHERE statusas='pateikta'";
 		try {
 			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
-				String irasoData = rs.getString("iraso_data");
+				String data = rs.getString("iraso_data");
 				String tema = rs.getString("tema");
 				String aprasymas = rs.getString("aprasymas");
+				String gedimaPateike = rs.getString("gedima_pateike");
 				String statusas = rs.getString("statusas");
-				String vykdytojas = rs.getString("vykdytojas");
-				String vykdytojoIrasoData = rs.getString("vykdytojo_iraso_data");
-
-				sarasas.add(new Gedimas(irasoData, tema, aprasymas, statusas, vykdytojas, vykdytojoIrasoData));
+				sarasas.add(new Gedimas(data, tema, aprasymas, gedimaPateike, statusas));
 
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException();
+				throw new RuntimeException();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new RuntimeException();
+			}
 		}
 		return sarasas;
 
 	}
-	
-	
-	
-	
-	public List<Gedimas> gautiVisusPateiktus(String dataNuo, String dataIki) throws IOException
-	 {
-List<Gedimas> sarasas = new ArrayList<>();
-Connection connection = MySqlConnect.getConnection();
-String sql = "select * from gedimai where (iraso_data BETWEEN '"+dataNuo+"' AND '"+dataIki+"')";
-try {
-	PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
-	ResultSet rs = pst.executeQuery();
-	while (rs.next()) {
-		String irasoData = rs.getString("iraso_data");
-		String tema = rs.getString("tema");
-		String aprasymas = rs.getString("aprasymas");
-		String statusas = rs.getString("statusas");
-		String vykdytojas = rs.getString("vykdytojas");
-		String vykdytojoIrasoData = rs.getString("vykdytojo_iraso_data");
-
-		sarasas.add(new Gedimas(irasoData, tema, aprasymas, statusas, vykdytojas, vykdytojoIrasoData));
-
-	}
-} catch (SQLException e) {
-	throw new RuntimeException();
-}
-return sarasas;
-
-}
 
 }

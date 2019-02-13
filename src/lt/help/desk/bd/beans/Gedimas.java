@@ -5,6 +5,7 @@ public class Gedimas {
 	private String tema;
 	private String aprasymas;
 	private String statusas;
+	private String gedimaPateike;
 	private String vykdytojas;
 	private String vykdytojoIrasoKeitimoData;
 
@@ -17,6 +18,16 @@ public class Gedimas {
 		this.statusas = statusas;
 		this.vykdytojas = vykdytojas;
 		this.vykdytojoIrasoKeitimoData = vykdytojoIrasoKeitimoData;
+
+	}
+	
+	public Gedimas(String data, String tema, String aprasymas, String gedimaPateike, String statusas) {
+
+		this.data = data;
+		this.tema = tema;
+		this.aprasymas = aprasymas;
+		this.gedimaPateike = gedimaPateike;
+		this.statusas = statusas;
 
 	}
 
@@ -66,6 +77,14 @@ public class Gedimas {
 
 	public void setVykdytojoIrasoKeitimoData(String vykdytojoIrasoKeitimoData) {
 		this.vykdytojoIrasoKeitimoData = vykdytojoIrasoKeitimoData;
+	}
+
+	public String getGedimaPateike() {
+		return gedimaPateike;
+	}
+
+	public void setGedimaPateike(String gedimaPateike) {
+		this.gedimaPateike = gedimaPateike;
 	}
 
 }

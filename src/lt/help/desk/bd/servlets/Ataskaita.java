@@ -18,7 +18,6 @@ import com.mysql.jdbc.PreparedStatement;
 
 import lt.help.desk.bd.gedimai.PatikrintiDuArgumentus;
 import lt.help.desk.bd.mySql.connection.MySqlConnect;
-import lt.help.desk.bd.service.Gedimai;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -36,7 +35,6 @@ import com.itextpdf.text.pdf.PdfPTable;
 public class Ataskaita extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	Gedimai gedimai = new Gedimai();
 	PatikrintiDuArgumentus patikrintiDuArgumentus = new PatikrintiDuArgumentus();
 	
 	
