@@ -9,15 +9,16 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import lt.help.desk.bd.beans.LoginUserAtribute;
+import lt.help.desk.bd.klasifikatoriai.Vaidmenys;
 import lt.help.desk.bd.login.JDBCConnection;
 
 public class LoginUserFromMySql extends JDBCConnection {
 
-	public boolean getSuperAdminLogin(String loginName, String loginPassword)
-	 {
+
+	public boolean getLogin(String loginName, String loginPassword, Vaidmenys vaidmuo) {
 		Connection connection = (Connection) getConnection();
 		String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"
-				+ loginPassword + "' AND vaidmuo='superAdmin'";
+				+ loginPassword + "' AND vaidmuo='" + vaidmuo + "'";
 		try {
 			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
@@ -30,59 +31,23 @@ public class LoginUserFromMySql extends JDBCConnection {
 		return false;
 	}
 
-	public boolean getBossConnection(String loginName, String loginPassword)
-	 {
-		Connection connection = (Connection) getConnection();
-		String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"
-				+ loginPassword + "' AND vaidmuo='vadovas_it'";
-		try {
-			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery();
-			if (rs.next()) {
-				return true;
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		return false;
+	public boolean getSuperAdminLogin(String loginName, String loginPassword, Vaidmenys vaidmuo) {
+		return getLogin(loginName, loginPassword, vaidmuo.superAdmin);
 	}
 
-	public boolean getLocalAdminConnection(String loginName, String loginPassword)
- {
-		Connection connection = (Connection) getConnection();
-		String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"
-				+ loginPassword + "' AND vaidmuo='darbuotojas_it'";
-		try {
-			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery();
-			if (rs.next()) {
-				return true;
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		return false;
+	public boolean getBossConnection(String loginName, String loginPassword, Vaidmenys vaidmuo) {
+		return getLogin(loginName, loginPassword, vaidmuo.vadovas_it);
 	}
 
-	public boolean getUserConnection(String loginName, String loginPassword)
-{
-		Connection connection = (Connection) getConnection();
-		String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"
-				+ loginPassword + "' AND vaidmuo='user'";
-		try {
-			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery();
-			if (rs.next()) {
-				return true;
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		return false;
+	public boolean getLocalAdminConnection(String loginName, String loginPassword, Vaidmenys vaidmuo) {
+		return getLogin(loginName, loginPassword, vaidmuo.darbuotojas_it);
 	}
 
-	public List<LoginUserAtribute> getLoginUserAtributes(String loginName)
- {
+	public boolean getUserConnection(String loginName, String loginPassword, Vaidmenys vaidmuo) {
+		return getLogin(loginName, loginPassword, vaidmuo.user);
+	}
+
+	public List<LoginUserAtribute> getLoginUserAtributes(String loginName) {
 		List<LoginUserAtribute> atributuSarasas = new ArrayList<>();
 		Connection connection = (Connection) getConnection();
 		String sql = "SELECT user_name, user_surname, skyrius, pareigos FROM users WHERE login_name='" + loginName

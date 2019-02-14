@@ -8,6 +8,7 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import lt.help.desk.bd.beans.Naudotojas;
+import lt.help.desk.bd.beans.Skyrius;
 import lt.help.desk.bd.login.JDBCConnection;
 
 public class Naudotojai extends JDBCConnection{
@@ -30,6 +31,8 @@ public class Naudotojai extends JDBCConnection{
 				String skyriausPavadinimas = rs.getString("s.pavadinimas");
 				String pareigos = rs.getString("u.pareigos");
 				String vaidmuo = rs.getString("u.vaidmuo");
+				
+				
 				sarasas.add(new Naudotojas(id, loginName, userName, userSurname, email, skyriausPavadinimas, pareigos,
 						vaidmuo));
 
