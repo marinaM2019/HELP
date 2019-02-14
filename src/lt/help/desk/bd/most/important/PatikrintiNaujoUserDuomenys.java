@@ -11,7 +11,7 @@ public class PatikrintiNaujoUserDuomenys {
 		return true;
 	}
 
-	private boolean arSlaptazodisSutampa(String pasw, String confPasw) {
+	public boolean arSlaptazodisSutampa(String pasw, String confPasw) {
 		if (pasw.isEmpty() || pasw.length() > PASSWORD_MAX_SIMBOLIU || (!(pasw.equals(confPasw)))) {
 			return false;
 		}
