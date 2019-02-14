@@ -1,8 +1,6 @@
 package lt.help.desk.bd.servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +11,7 @@ import javax.servlet.http.HttpSession;
 import lt.help.desk.bd.gedimai.PatikrintiDuArgumentus;
 import lt.help.desk.bd.service.Gedimai;
 
-/**
- * Servlet implementation class pateiktiGedima
- */
+
 @WebServlet("/PateiktiGedima")
 public class PateiktiGedima extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -34,12 +30,10 @@ public class PateiktiGedima extends HttpServlet {
 		PatikrintiDuArgumentus patikrintiArTemaIrAprasymasPateikti = new PatikrintiDuArgumentus();
 
 		if (patikrintiArTemaIrAprasymasPateikti.arPateikti(gedimoTema, gedimoAprasymas)) {
-			try {
+			
 				gedimai.itraukti(gedimoTema, gedimoAprasymas, loginName);
 				response.sendRedirect("Home.jsp");
-			} catch (Exception e) {
-				throw new RuntimeException();
-			} 
+			
 		}
 	}
 

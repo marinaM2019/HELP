@@ -1,4 +1,4 @@
-package lt.help.desk.bd.login;
+package lt.help.desk.bd.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import lt.help.desk.bd.mySql.connection.LoginUserFromMySql;
+import lt.help.desk.bd.most.important.LoginUserFromMySql;
 
 //import mySql.connection.LoginUserFromMySql2;
 
@@ -25,7 +25,7 @@ public class LoginAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	 {
 		HttpSession session = request.getSession();
 
 		// LoginData loginData = new LoginData();
@@ -62,8 +62,8 @@ public class LoginAction extends HttpServlet {
 				response.sendRedirect("BadLogin.jsp");
 				return;
 			}
-		} catch (ClassNotFoundException | SQLException e) {
-			throw new RuntimeException();
+		} catch ( IOException e) {
+			throw new RuntimeException("LoginAction klasės klaida: "+e);
 		}
 
 		session.setAttribute("loginName", loginName);

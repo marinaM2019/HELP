@@ -1,4 +1,4 @@
-package lt.help.desk.bd.logout;
+package lt.help.desk.bd.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

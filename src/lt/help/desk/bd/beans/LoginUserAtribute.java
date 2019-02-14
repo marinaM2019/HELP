@@ -1,4 +1,4 @@
-package lt.help.desk.bd.login;
+package lt.help.desk.bd.beans;
 
 public class LoginUserAtribute {
 

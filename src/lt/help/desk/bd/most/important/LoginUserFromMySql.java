@@ -1,7 +1,5 @@
-package lt.help.desk.bd.mySql.connection;
+package lt.help.desk.bd.most.important;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,14 +8,14 @@ import java.util.List;
 
 import com.mysql.jdbc.PreparedStatement;
 
-import lt.help.desk.bd.login.LoginUserAtribute;
+import lt.help.desk.bd.beans.LoginUserAtribute;
+import lt.help.desk.bd.login.MySqlConnect;
 
-public class LoginUserFromMySql {
+public class LoginUserFromMySql extends MySqlConnect {
 
 	public boolean getSuperAdminLogin(String loginName, String loginPassword)
-			throws SQLException, FileNotFoundException, IOException, ClassNotFoundException {
-
-		Connection connection = MySqlConnect.getConnection();
+	 {
+		Connection connection = (Connection) getConnection();
 		String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"
 				+ loginPassword + "' AND vaidmuo='superAdmin'";
 		try {
@@ -27,14 +25,14 @@ public class LoginUserFromMySql {
 				return true;
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 		return false;
 	}
 
 	public boolean getBossConnection(String loginName, String loginPassword)
-			throws SQLException, FileNotFoundException, IOException, ClassNotFoundException {
-		Connection connection = MySqlConnect.getConnection();
+	 {
+		Connection connection = (Connection) getConnection();
 		String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"
 				+ loginPassword + "' AND vaidmuo='vadovas_it'";
 		try {
@@ -44,14 +42,14 @@ public class LoginUserFromMySql {
 				return true;
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 		return false;
 	}
 
 	public boolean getLocalAdminConnection(String loginName, String loginPassword)
-			throws SQLException, FileNotFoundException, IOException, ClassNotFoundException {
-		Connection connection = MySqlConnect.getConnection();
+ {
+		Connection connection = (Connection) getConnection();
 		String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"
 				+ loginPassword + "' AND vaidmuo='darbuotojas_it'";
 		try {
@@ -61,14 +59,14 @@ public class LoginUserFromMySql {
 				return true;
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 		return false;
 	}
 
 	public boolean getUserConnection(String loginName, String loginPassword)
-			throws SQLException, FileNotFoundException, IOException, ClassNotFoundException {
-		Connection connection = MySqlConnect.getConnection();
+{
+		Connection connection = (Connection) getConnection();
 		String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"
 				+ loginPassword + "' AND vaidmuo='user'";
 		try {
@@ -78,15 +76,15 @@ public class LoginUserFromMySql {
 				return true;
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 		return false;
 	}
 
 	public List<LoginUserAtribute> getLoginUserAtributes(String loginName)
-			throws SQLException, FileNotFoundException, IOException, ClassNotFoundException {
+ {
 		List<LoginUserAtribute> atributuSarasas = new ArrayList<>();
-		Connection connection = MySqlConnect.getConnection();
+		Connection connection = (Connection) getConnection();
 		String sql = "SELECT user_name, user_surname, skyrius, pareigos FROM users WHERE login_name='" + loginName
 				+ "'";
 		try {
@@ -101,7 +99,7 @@ public class LoginUserFromMySql {
 				atributuSarasas.add(new LoginUserAtribute(name, surname, skyrius, pareigos));
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 		return atributuSarasas;
 	}

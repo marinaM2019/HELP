@@ -1,4 +1,4 @@
-package lt.help.desk.bd.mySql.connection;
+package lt.help.desk.bd.login;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,30 +21,24 @@ import org.apache.commons.io.FileUtils;
 public class MySqlConnect {
 	
 	
-	private static final String DB_DRIVER_CLASS_NAME = "driver_class_name";
-	private static final String DB_USERNAME = "username";
-	private static final String DB_PASSWORD = "password";
-	private static final String DB_URL = "url";
-	private static Properties properties = null;
+//	private final String DB_DRIVER_CLASS_NAME = "driver_class_name";
+//	private final String DB_USERNAME = "username";
+//	private final String DB_PASSWORD = "password";
+//	private final String DB_URL = "url";
+//	private Properties properties = null;
 	
-	private static Connection con;
+	private Connection con;
 
-	private MySqlConnect() {}
-
-	public static Connection getConnection() throws IOException {
-
-		
-		
-		
+	public Connection getConnection() {
 		if (con == null ) {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
-				String host = "jdbc:mysql://192.168.0.60/help_desk?autoReconnect=true&useSSL=false";
+				String host = "jdbc:mysql://192.168.115.156/help_desk?autoReconnect=true&useSSL=false";
 				String username = "admin";
 				String password = "help1111";
 				con = DriverManager.getConnection(host, username, password);
-			} catch (SQLException | ClassNotFoundException ex) {
-				throw new RuntimeException();
+			} catch (SQLException | ClassNotFoundException e) {
+				throw new RuntimeException(e);
 			}
 		}
 

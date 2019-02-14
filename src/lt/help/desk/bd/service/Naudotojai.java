@@ -1,24 +1,21 @@
 package lt.help.desk.bd.service;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mysql.jdbc.PreparedStatement;
 
 import lt.help.desk.bd.beans.Naudotojas;
-import lt.help.desk.bd.mySql.connection.MySqlConnect;
+import lt.help.desk.bd.login.MySqlConnect;
 
-public class Naudotojai {
+public class Naudotojai extends MySqlConnect{
 
 	public List<Naudotojas> gautiNaudotojuSarasa()
-			throws SQLException, ClassNotFoundException, FileNotFoundException, IOException {
+	 {
 		List<Naudotojas> sarasas = new ArrayList<>();
-		Connection connection = MySqlConnect.getConnection();
+		Connection connection = (Connection) getConnection();
 
 		String sql = "SELECT u.id, u.login_name, u.user_name, u.user_surname, u.email, s.pavadinimas, u.pareigos, u.vaidmuo FROM users u INNER JOIN skyriai s ON u.skyrius=s.id ORDER BY u.id";
 		try {
@@ -37,14 +34,8 @@ public class Naudotojai {
 						vaidmuo));
 
 			}
-		} catch (SQLException e) {
-				throw new RuntimeException();
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new RuntimeException();
-			}
+		}  catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 		return sarasas;
 
@@ -52,8 +43,8 @@ public class Naudotojai {
 
 	public void sukurtiNauja(String loginName, String passwordas, String userName, String userSurname, String email,
 			String skyrius, String pareigos, String vaidmuo)
-			throws SQLException, ClassNotFoundException, FileNotFoundException, IOException {
-		Connection conn = MySqlConnect.getConnection();
+	 {
+		Connection conn = (Connection) getConnection();
 		String Sql = "INSERT  INTO users (login_name, passw, user_name, user_surname, email, skyrius, pareigos, vaidmuo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
@@ -67,14 +58,8 @@ public class Naudotojai {
 			pst.setString(8, vaidmuo);
 			pst.executeUpdate();
 
-		} catch (Exception ee) {
-			throw new RuntimeException();
-		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				throw new RuntimeException();
-			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 }

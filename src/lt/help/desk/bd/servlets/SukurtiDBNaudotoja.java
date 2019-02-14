@@ -33,19 +33,16 @@ public class SukurtiDBNaudotoja extends HttpServlet {
 
 		if (atikrintiNaujoUserDuomenys.uzpildytiNeVisi(userLoginName, email, userPareigos, passw, passwConf, userSkyrius, userSurname,
 				userName, userVaidmuo)) {		
-				throw new RuntimeException();
-		}
+				
 
 		Naudotojai naudotojai = new Naudotojai();
 		
-			try {
-				naudotojai.sukurtiNauja(userLoginName, passw, userName, userSurname, email, userSkyrius, userPareigos,
-						userVaidmuo);
-			} catch (ClassNotFoundException | SQLException e) {
-				throw new RuntimeException();
-			}
+			naudotojai.sukurtiNauja(userLoginName, passw, userName, userSurname, email, userSkyrius, userPareigos,
+					userVaidmuo);
 		
 		response.sendRedirect("Administravimas.jsp");
+		} throw new RuntimeException("nevisi duomenys užpildyti");
+	
 	}
 
 }

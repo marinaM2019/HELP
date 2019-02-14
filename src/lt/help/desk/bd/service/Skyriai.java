@@ -7,13 +7,15 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import lt.help.desk.bd.beans.Skyrius;
-import lt.help.desk.bd.mySql.connection.MySqlConnect;
+import lt.help.desk.bd.login.MySqlConnect;
 
-public class Skyriai {
+public class Skyriai extends MySqlConnect{
 
-	public List<Skyrius> gautiSarasa() throws Exception {
+	public List<Skyrius> gautiSarasa() throws Exception 
+	{
 		List<Skyrius> sarasas = new ArrayList<>();
-		Connection connection = MySqlConnect.getConnection();
+		try {
+			Connection connection = (Connection) getConnection();
 		String sql = "SELECT id, pavadinimas FROM skyriai WHERE statusas=1 ORDER BY pavadinimas";
 		
 			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
@@ -23,22 +25,25 @@ public class Skyriai {
 				String pavadinimas = rs.getString("pavadinimas");
 				sarasas.add(new Skyrius(id, pavadinimas));
 			}
+		} catch (Exception e ){
+			throw new RuntimeException(e);
+		} 
 		return sarasas;
 	} 
 
 	
 	public void sukurtiNauja(String skyriausPavadinimas, String skyriausStatusas)
-			throws Exception {
-		Connection conn = MySqlConnect.getConnection();
-		String Sql = "INSERT  INTO skyriai (pavadinimas, statusas) VALUES (?, ?)";
+ {
 		try {
+			Connection conn = (Connection) getConnection();
+			String Sql = "INSERT  INTO skyriai (pavadinimas, statusas) VALUES (?, ?)";
 			PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
 			pst.setString(1, skyriausPavadinimas);
 			pst.setString(2, skyriausStatusas);
 			pst.executeUpdate();
 
 		} catch (Exception e ){
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		} 
 	}
 
