@@ -11,14 +11,15 @@ import lt.help.desk.bd.beans.Naudotojas;
 import lt.help.desk.bd.beans.Skyrius;
 import lt.help.desk.bd.login.JDBCConnection;
 
-public class Naudotojai extends JDBCConnection {
+public class Naudotojai {
 
 	public List<Naudotojas> gautiNaudotojuSarasa() {
 		List<Naudotojas> sarasas = new ArrayList<>();
-		Connection connection = (Connection) getConnection();
+		
 
 		String sql = "SELECT u.id, u.login_name, u.user_name, u.user_surname, u.email, s.pavadinimas, u.pareigos, u.vaidmuo FROM users u INNER JOIN skyriai s ON u.skyrius=s.id ORDER BY u.id";
 		try {
+			Connection connection = (Connection) JDBCConnection.getConnection();
 			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
@@ -44,9 +45,10 @@ public class Naudotojai extends JDBCConnection {
 
 	public void sukurtiNauja(String loginName, String passwordas, String userName, String userSurname, String email,
 			String skyrius, String pareigos, String vaidmuo) {
-		Connection conn = (Connection) getConnection();
-		String Sql = "INSERT  INTO users (login_name, passw, user_name, user_surname, email, skyrius, pareigos, vaidmuo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
+			Connection conn = (Connection) JDBCConnection.getConnection();
+			String Sql = "INSERT  INTO users (login_name, passw, user_name, user_surname, email, skyrius, pareigos, vaidmuo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			
 			PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
 			pst.setString(1, loginName);
 			pst.setString(2, passwordas);

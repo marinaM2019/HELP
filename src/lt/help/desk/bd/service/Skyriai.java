@@ -10,12 +10,13 @@ import com.mysql.jdbc.PreparedStatement;
 import lt.help.desk.bd.beans.Skyrius;
 import lt.help.desk.bd.login.JDBCConnection;
 
-public class Skyriai extends JDBCConnection {
+public class Skyriai {
 
 	public List<Skyrius> gautiSarasa() throws Exception {
 		List<Skyrius> sarasas = new ArrayList<>();
 		try {
-			Connection connection = (Connection) getConnection();
+			Connection connection = (Connection) JDBCConnection.getConnection();
+			
 			String sql = "SELECT id, pavadinimas FROM skyriai WHERE statusas=1 ORDER BY pavadinimas";
 
 			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
@@ -33,7 +34,8 @@ public class Skyriai extends JDBCConnection {
 
 	public void sukurtiNauja(String skyriausPavadinimas, String skyriausStatusas) {
 		try {
-			Connection conn = (Connection) getConnection();
+			Connection conn = (Connection) JDBCConnection.getConnection();
+			
 			String Sql = "INSERT  INTO skyriai (pavadinimas, statusas) VALUES (?, ?)";
 			PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
 			pst.setString(1, skyriausPavadinimas);

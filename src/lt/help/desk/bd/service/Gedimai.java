@@ -11,11 +11,12 @@ import com.mysql.jdbc.PreparedStatement;
 import lt.help.desk.bd.beans.Gedimas;
 import lt.help.desk.bd.login.JDBCConnection;
 
-public class Gedimai extends JDBCConnection {
+public class Gedimai {
 
 	public void itraukti(String gedimoTema, String gedimoAprasymas, String loginName) {
 		try {
-			Connection conn = (Connection) getConnection();
+			Connection conn = (Connection) JDBCConnection.getConnection();
+			
 			String Sql = "INSERT  INTO gedimai (tema, aprasymas, gedima_pateike) VALUES (?, ?, ?)";
 
 			PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
@@ -33,7 +34,7 @@ public class Gedimai extends JDBCConnection {
 		List<Gedimas> sarasas = new ArrayList<>();
 		try {
 
-			Connection connection = (Connection) getConnection();
+			Connection connection = (Connection) JDBCConnection.getConnection();
 
 			String sql = "SELECT iraso_data, tema, aprasymas, gedima_pateike, statusas FROM gedimai WHERE statusas='pateikta'";
 
@@ -48,7 +49,7 @@ public class Gedimai extends JDBCConnection {
 				sarasas.add(new Gedimas(data, tema, aprasymas, gedimaPateike, statusas));
 
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 		return sarasas;
@@ -59,7 +60,7 @@ public class Gedimai extends JDBCConnection {
 		List<Gedimas> sarasas = new ArrayList<>();
 		try {
 
-			Connection connection = (Connection) getConnection();
+			Connection connection = (Connection) JDBCConnection.getConnection();
 
 			String sql = "SELECT iraso_data, tema, aprasymas, statusas, vykdytojas, vykdytojo_iraso_data FROM gedimai WHERE gedima_pateike=? ORDER BY iraso_data DESC";
 
@@ -75,7 +76,7 @@ public class Gedimai extends JDBCConnection {
 				sarasas.add(new Gedimas(data, tema, aprasymas, statusas, vykdytojas, vykdytojoIrasoData));
 
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 		return sarasas;

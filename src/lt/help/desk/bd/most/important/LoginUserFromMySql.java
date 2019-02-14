@@ -12,19 +12,22 @@ import lt.help.desk.bd.beans.LoginUserAtribute;
 import lt.help.desk.bd.klasifikatoriai.Vaidmenys;
 import lt.help.desk.bd.login.JDBCConnection;
 
-public class LoginUserFromMySql extends JDBCConnection {
+public class LoginUserFromMySql {
 
+
+	
 	public boolean getLogin(String loginName, String loginPassword, Vaidmenys vaidmuo) {
-		Connection connection = (Connection) getConnection();
-		String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"
-				+ loginPassword + "' AND vaidmuo='" + vaidmuo + "'";
+		
 		try {
+			Connection connection = (Connection) JDBCConnection.getConnection();
+			String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"
+					+ loginPassword + "' AND vaidmuo='" + vaidmuo + "'";
 			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 				return true;
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 		return false;
@@ -48,10 +51,11 @@ public class LoginUserFromMySql extends JDBCConnection {
 
 	public List<LoginUserAtribute> getLoginUserAtributes(String loginName) {
 		List<LoginUserAtribute> atributuSarasas = new ArrayList<>();
-		Connection connection = (Connection) getConnection();
-		String sql = "SELECT user_name, user_surname, skyrius, pareigos FROM users WHERE login_name='" + loginName
-				+ "'";
+		
 		try {
+			Connection connection = (Connection) JDBCConnection.getConnection();
+			String sql = "SELECT user_name, user_surname, skyrius, pareigos FROM users WHERE login_name='" + loginName
+					+ "'";
 			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
 			pst.setString(1, loginName);
 			ResultSet rs = pst.executeQuery();
@@ -62,7 +66,7 @@ public class LoginUserFromMySql extends JDBCConnection {
 				String pareigos = rs.getString("pareigos");
 				atributuSarasas.add(new LoginUserAtribute(name, surname, skyrius, pareigos));
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 		return atributuSarasas;
