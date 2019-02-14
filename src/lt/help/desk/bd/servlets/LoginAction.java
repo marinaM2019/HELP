@@ -25,45 +25,42 @@ public class LoginAction extends HttpServlet {
 	LoginUserFromMySql loginUserFromMySql = new LoginUserFromMySql();
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
-	 {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 
 		// LoginData loginData = new LoginData();
 		String loginName = request.getParameter("loginName").toLowerCase().trim();
 		String loginPassword = request.getParameter("loginPassword");
 
+		if (loginUserFromMySql.getSuperAdminLogin(loginName, loginPassword, Vaidmenys.superAdmin)) {
 
-			if (loginUserFromMySql.getSuperAdminLogin(loginName, loginPassword, Vaidmenys.superAdmin)) {
+			response.sendRedirect("Administravimas.jsp");
+			session.setAttribute("loginName", loginName);
+			session.setAttribute("name", "super administratorius");
+			session.setAttribute("surname", "");
+			session.setAttribute("skyrius", "");
+			session.setAttribute("pareigos", "");
 
-				response.sendRedirect("Administravimas.jsp");
-				session.setAttribute("loginName", loginName);
-				session.setAttribute("name", "super administratorius");
-				session.setAttribute("surname", "");
-				session.setAttribute("skyrius", "");
-				session.setAttribute("pareigos", "");
+			session.setAttribute("surname", "");
+			session.setAttribute("skyrius", "");
+			session.setAttribute("pareigos", "");
 
-				session.setAttribute("surname", "");
-				session.setAttribute("skyrius", "");
-				session.setAttribute("pareigos", "");
+		} else
 
-			} else
+		if (loginUserFromMySql.getBossConnection(loginName, loginPassword, Vaidmenys.vadovas_it)) {
+			response.sendRedirect("Boss.jsp");
+		} else
 
-			if (loginUserFromMySql.getBossConnection(loginName, loginPassword, Vaidmenys.vadovas_it)) {
-				response.sendRedirect("Boss.jsp");
-			} else
+		if (loginUserFromMySql.getLocalAdminConnection(loginName, loginPassword, Vaidmenys.darbuotojas_it)) {
+			response.sendRedirect("LocalAdmin.jsp");
+		} else
 
-			if (loginUserFromMySql.getLocalAdminConnection(loginName, loginPassword, Vaidmenys.darbuotojas_it)) {
-				response.sendRedirect("LocalAdmin.jsp");
-			} else
-
-			if (loginUserFromMySql.getUserConnection(loginName, loginPassword, Vaidmenys.user)) {
-				response.sendRedirect("Home.jsp");
-			} else {
-				response.sendRedirect("BadLogin.jsp");
-				return;
-			}
-		
+		if (loginUserFromMySql.getUserConnection(loginName, loginPassword, Vaidmenys.user)) {
+			response.sendRedirect("Home.jsp");
+		} else {
+			response.sendRedirect("BadLogin.jsp");
+			return;
+		}
 
 		session.setAttribute("loginName", loginName);
 		session.setAttribute("name", name);

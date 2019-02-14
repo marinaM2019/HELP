@@ -55,12 +55,6 @@ public class Gedimai extends JDBCConnection {
 
 	}
 
-	
-	
-	
-	
-	
-	
 	public List<Gedimas> gautiManoGedimus(String gedimaPateike) {
 		List<Gedimas> sarasas = new ArrayList<>();
 		try {

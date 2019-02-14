@@ -14,7 +14,6 @@ import lt.help.desk.bd.login.JDBCConnection;
 
 public class LoginUserFromMySql extends JDBCConnection {
 
-
 	public boolean getLogin(String loginName, String loginPassword, Vaidmenys vaidmuo) {
 		Connection connection = (Connection) getConnection();
 		String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"

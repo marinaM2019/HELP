@@ -11,10 +11,9 @@ import lt.help.desk.bd.beans.Naudotojas;
 import lt.help.desk.bd.beans.Skyrius;
 import lt.help.desk.bd.login.JDBCConnection;
 
-public class Naudotojai extends JDBCConnection{
+public class Naudotojai extends JDBCConnection {
 
-	public List<Naudotojas> gautiNaudotojuSarasa()
-	 {
+	public List<Naudotojas> gautiNaudotojuSarasa() {
 		List<Naudotojas> sarasas = new ArrayList<>();
 		Connection connection = (Connection) getConnection();
 
@@ -31,13 +30,12 @@ public class Naudotojai extends JDBCConnection{
 				String skyriausPavadinimas = rs.getString("s.pavadinimas");
 				String pareigos = rs.getString("u.pareigos");
 				String vaidmuo = rs.getString("u.vaidmuo");
-				
-				
+
 				sarasas.add(new Naudotojas(id, loginName, userName, userSurname, email, skyriausPavadinimas, pareigos,
 						vaidmuo));
 
 			}
-		}  catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		return sarasas;
@@ -45,8 +43,7 @@ public class Naudotojai extends JDBCConnection{
 	}
 
 	public void sukurtiNauja(String loginName, String passwordas, String userName, String userSurname, String email,
-			String skyrius, String pareigos, String vaidmuo)
-	 {
+			String skyrius, String pareigos, String vaidmuo) {
 		Connection conn = (Connection) getConnection();
 		String Sql = "INSERT  INTO users (login_name, passw, user_name, user_surname, email, skyrius, pareigos, vaidmuo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try {

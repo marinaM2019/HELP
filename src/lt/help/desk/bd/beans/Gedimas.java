@@ -20,7 +20,7 @@ public class Gedimas {
 		this.vykdytojoIrasoKeitimoData = vykdytojoIrasoKeitimoData;
 
 	}
-	
+
 	public Gedimas(String data, String tema, String aprasymas, String gedimaPateike, String statusas) {
 
 		this.data = data;

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import lt.help.desk.bd.gedimai.PatikrintiDuArgumentus;
 import lt.help.desk.bd.service.Gedimai;
 
-
 @WebServlet("/PateiktiGedima")
 public class PateiktiGedima extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,10 +29,10 @@ public class PateiktiGedima extends HttpServlet {
 		PatikrintiDuArgumentus patikrintiArTemaIrAprasymasPateikti = new PatikrintiDuArgumentus();
 
 		if (patikrintiArTemaIrAprasymasPateikti.arPateikti(gedimoTema, gedimoAprasymas)) {
-			
-				gedimai.itraukti(gedimoTema, gedimoAprasymas, loginName);
-				response.sendRedirect("Home.jsp");
-			
+
+			gedimai.itraukti(gedimoTema, gedimoAprasymas, loginName);
+			response.sendRedirect("Home.jsp");
+
 		}
 	}
 
