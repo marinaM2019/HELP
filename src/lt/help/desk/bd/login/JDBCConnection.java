@@ -4,29 +4,25 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
 public class JDBCConnection {
 
 	private Connection con;
-	
-	private Connection getInst() {
+
+	private static String CLASSFORNAME = "com.mysql.jdbc.Driver";
+	private static String HOST = "jdbc:mysql://localhost:3306/testdb";
+	private static String USERNAME = "admin";
+	private static String PASSWORD = "help1111";
+
+	public Connection getConnection() {
 		if (con == null) {
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				String host = "jdbc:mysql://192.168.115.156/help_desk?autoReconnect=true&useSSL=false";
-				String username = "admin";
-				String password = "help1111";
-				con = DriverManager.getConnection(host, username, password);
+				Class.forName(CLASSFORNAME);
+				con = DriverManager.getConnection(HOST, USERNAME, PASSWORD);
 			} catch (SQLException | ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
 		}
 
 		return con;
-	}
-	 
-
-	public Connection getConnection() {
-		return getInst();
 	}
 }
