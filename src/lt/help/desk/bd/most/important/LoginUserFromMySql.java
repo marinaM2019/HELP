@@ -14,14 +14,12 @@ import lt.help.desk.bd.login.JDBCConnection;
 
 public class LoginUserFromMySql {
 
-
-	
 	public boolean getLogin(String loginName, String loginPassword, Vaidmenys vaidmuo) {
-		
+
 		try {
 			Connection connection = (Connection) JDBCConnection.getConnection();
-			String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName + "' AND passw='"
-					+ loginPassword + "' AND vaidmuo='" + vaidmuo + "'";
+			String sql = "SELECT login_name, passw FROM help_desk.users WHERE login_name='" + loginName
+					+ "' AND passw='" + loginPassword + "' AND vaidmuo='" + vaidmuo + "'";
 			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
@@ -51,7 +49,7 @@ public class LoginUserFromMySql {
 
 	public List<LoginUserAtribute> getLoginUserAtributes(String loginName) {
 		List<LoginUserAtribute> atributuSarasas = new ArrayList<>();
-		
+
 		try {
 			Connection connection = (Connection) JDBCConnection.getConnection();
 			String sql = "SELECT user_name, user_surname, skyrius, pareigos FROM users WHERE login_name='" + loginName

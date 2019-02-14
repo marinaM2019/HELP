@@ -15,7 +15,6 @@ public class Naudotojai {
 
 	public List<Naudotojas> gautiNaudotojuSarasa() {
 		List<Naudotojas> sarasas = new ArrayList<>();
-		
 
 		String sql = "SELECT u.id, u.login_name, u.user_name, u.user_surname, u.email, s.pavadinimas, u.pareigos, u.vaidmuo FROM users u INNER JOIN skyriai s ON u.skyrius=s.id ORDER BY u.id";
 		try {
@@ -48,7 +47,7 @@ public class Naudotojai {
 		try {
 			Connection conn = (Connection) JDBCConnection.getConnection();
 			String Sql = "INSERT  INTO users (login_name, passw, user_name, user_surname, email, skyrius, pareigos, vaidmuo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-			
+
 			PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
 			pst.setString(1, loginName);
 			pst.setString(2, passwordas);

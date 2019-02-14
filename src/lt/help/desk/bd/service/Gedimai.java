@@ -16,7 +16,7 @@ public class Gedimai {
 	public void itraukti(String gedimoTema, String gedimoAprasymas, String loginName) {
 		try {
 			Connection conn = (Connection) JDBCConnection.getConnection();
-			
+
 			String Sql = "INSERT  INTO gedimai (tema, aprasymas, gedima_pateike) VALUES (?, ?, ?)";
 
 			PreparedStatement pst = (PreparedStatement) conn.prepareStatement(Sql);
