@@ -7,9 +7,9 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import lt.help.desk.bd.beans.Skyrius;
-import lt.help.desk.bd.login.MySqlConnect;
+import lt.help.desk.bd.login.JDBCConnection;
 
-public class Skyriai extends MySqlConnect{
+public class Skyriai extends JDBCConnection{
 
 	public List<Skyrius> gautiSarasa() throws Exception 
 	{

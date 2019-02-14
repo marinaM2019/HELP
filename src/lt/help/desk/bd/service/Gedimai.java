@@ -9,9 +9,9 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import lt.help.desk.bd.beans.Gedimas;
-import lt.help.desk.bd.login.MySqlConnect;
+import lt.help.desk.bd.login.JDBCConnection;
 
-public class Gedimai extends MySqlConnect {
+public class Gedimai extends JDBCConnection {
 
 	public void itraukti(String gedimoTema, String gedimoAprasymas, String loginName) {
 		try {

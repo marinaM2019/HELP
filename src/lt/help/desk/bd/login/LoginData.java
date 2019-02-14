@@ -3,7 +3,7 @@ package lt.help.desk.bd.login;
 import java.sql.Connection;
 
 
-public class LoginData extends MySqlConnect {
+public class LoginData extends JDBCConnection {
 
 	public boolean getLoginFromDB(String loginName, String password) {
 		

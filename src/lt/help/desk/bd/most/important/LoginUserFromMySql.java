@@ -9,9 +9,9 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import lt.help.desk.bd.beans.LoginUserAtribute;
-import lt.help.desk.bd.login.MySqlConnect;
+import lt.help.desk.bd.login.JDBCConnection;
 
-public class LoginUserFromMySql extends MySqlConnect {
+public class LoginUserFromMySql extends JDBCConnection {
 
 	public boolean getSuperAdminLogin(String loginName, String loginPassword)
 	 {

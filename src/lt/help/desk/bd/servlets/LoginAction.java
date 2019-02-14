@@ -24,7 +24,7 @@ public class LoginAction extends HttpServlet {
 	LoginUserFromMySql loginUserFromMySql = new LoginUserFromMySql();
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
 	 {
 		HttpSession session = request.getSession();
 
@@ -32,7 +32,7 @@ public class LoginAction extends HttpServlet {
 		String loginName = request.getParameter("loginName").toLowerCase().trim();
 		String loginPassword = request.getParameter("loginPassword");
 
-		try {
+
 			if (loginUserFromMySql.getSuperAdminLogin(loginName, loginPassword)) {
 
 				response.sendRedirect("Administravimas.jsp");
@@ -62,9 +62,7 @@ public class LoginAction extends HttpServlet {
 				response.sendRedirect("BadLogin.jsp");
 				return;
 			}
-		} catch ( IOException e) {
-			throw new RuntimeException("LoginAction klasės klaida: "+e);
-		}
+		
 
 		session.setAttribute("loginName", loginName);
 		session.setAttribute("name", name);

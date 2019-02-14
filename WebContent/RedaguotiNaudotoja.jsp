@@ -6,7 +6,7 @@
 <%@ page import="javax.xml.XMLConstants" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.sql.DriverManager" %>
-<%@ page import="lt.help.desk.bd.login.MySqlConnect" %>
+<%@ page import="lt.help.desk.bd.login.JDBCConnection" %>
 <%@ page import="lt.help.desk.bd.service.Naudotojai" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
