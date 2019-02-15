@@ -1,6 +1,5 @@
 package lt.help.desk.bd.service;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,13 +30,13 @@ public class Gedimai {
 		}
 	}
 
-	public List<Gedimas> gautiNepaskirtus() {
+	public List<Gedimas> gautiNepaskirtusPagalLaikotarpi (String dataNuo, String dataIki) {
 		List<Gedimas> sarasas = new ArrayList<>();
 		try {
 
 			Connection connection = (Connection) JDBCConnection.getConnection();
 
-			String sql = "SELECT iraso_data, tema, aprasymas, gedima_pateike, statusas FROM gedimai WHERE statusas='pateikta'";
+			String sql = "select iraso_data, tema, aprasymas, gedima_pateike, statusas from gedimai where (iraso_data BETWEEN ? AND ?)";
 
 			PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
@@ -50,7 +49,7 @@ public class Gedimai {
 				sarasas.add(new Gedimas(data, tema, aprasymas, gedimaPateike, statusas));
 
 			}
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		return sarasas;
@@ -77,7 +76,7 @@ public class Gedimai {
 				sarasas.add(new Gedimas(data, tema, aprasymas, statusas, vykdytojas, vykdytojoIrasoData));
 
 			}
-		} catch (SQLException | ClassNotFoundException  e) {
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		return sarasas;

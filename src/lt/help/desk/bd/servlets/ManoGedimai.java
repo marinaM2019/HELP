@@ -111,7 +111,7 @@ public class ManoGedimai extends HttpServlet {
 
 			}
 
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 

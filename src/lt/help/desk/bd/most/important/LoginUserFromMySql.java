@@ -1,6 +1,5 @@
 package lt.help.desk.bd.most.important;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,27 +25,27 @@ public class LoginUserFromMySql {
 			if (rs.next()) {
 				return true;
 			}
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException  e) {
 			throw new RuntimeException(e);
 		}
 		return false;
 	}
 
-	public boolean getSuperAdminLogin(String loginName, String loginPassword, Vaidmenys vaidmuo) {
-		return getLogin(loginName, loginPassword, vaidmuo.superAdmin);
-	}
+	public boolean getSuperAdminLogin(String loginName, String loginPassword) {
+        return getLogin(loginName, loginPassword, Vaidmenys.superAdmin);
+    }
 
-	public boolean getBossConnection(String loginName, String loginPassword, Vaidmenys vaidmuo) {
-		return getLogin(loginName, loginPassword, vaidmuo.vadovas_it);
-	}
+    public boolean getBossConnection(String loginName, String loginPassword) {
+        return getLogin(loginName, loginPassword, Vaidmenys.vadovas_it);
+    }
 
-	public boolean getLocalAdminConnection(String loginName, String loginPassword, Vaidmenys vaidmuo) {
-		return getLogin(loginName, loginPassword, vaidmuo.darbuotojas_it);
-	}
+    public boolean getLocalAdminConnection(String loginName, String loginPassword) {
+        return getLogin(loginName, loginPassword, Vaidmenys.darbuotojas_it);
+    }
 
-	public boolean getUserConnection(String loginName, String loginPassword, Vaidmenys vaidmuo) {
-		return getLogin(loginName, loginPassword, vaidmuo.user);
-	}
+    public boolean getUserConnection(String loginName, String loginPassword) {
+        return getLogin(loginName, loginPassword, Vaidmenys.user);
+    }
 
 	public List<LoginUserAtribute> getLoginUserAtributes(String loginName) {
 		List<LoginUserAtribute> atributuSarasas = new ArrayList<>();
@@ -65,7 +64,7 @@ public class LoginUserFromMySql {
 				String pareigos = rs.getString("pareigos");
 				atributuSarasas.add(new LoginUserAtribute(name, surname, skyrius, pareigos));
 			}
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		return atributuSarasas;

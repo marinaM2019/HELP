@@ -1,16 +1,13 @@
 package lt.help.desk.bd.servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import lt.help.desk.bd.klasifikatoriai.Vaidmenys;
 import lt.help.desk.bd.most.important.LoginUserFromMySql;
 
 //import mySql.connection.LoginUserFromMySql2;
@@ -32,7 +29,7 @@ public class LoginAction extends HttpServlet {
 		String loginName = request.getParameter("loginName").toLowerCase().trim();
 		String loginPassword = request.getParameter("loginPassword");
 
-		if (loginUserFromMySql.getSuperAdminLogin(loginName, loginPassword, Vaidmenys.superAdmin)) {
+		if (loginUserFromMySql.getSuperAdminLogin(loginName, loginPassword)) {
 
 			response.sendRedirect("Administravimas.jsp");
 			session.setAttribute("loginName", loginName);
@@ -47,15 +44,15 @@ public class LoginAction extends HttpServlet {
 
 		} else
 
-		if (loginUserFromMySql.getBossConnection(loginName, loginPassword, Vaidmenys.vadovas_it)) {
+		if (loginUserFromMySql.getBossConnection(loginName, loginPassword)) {
 			response.sendRedirect("Boss.jsp");
 		} else
 
-		if (loginUserFromMySql.getLocalAdminConnection(loginName, loginPassword, Vaidmenys.darbuotojas_it)) {
+		if (loginUserFromMySql.getLocalAdminConnection(loginName, loginPassword)) {
 			response.sendRedirect("LocalAdmin.jsp");
 		} else
 
-		if (loginUserFromMySql.getUserConnection(loginName, loginPassword, Vaidmenys.user)) {
+		if (loginUserFromMySql.getUserConnection(loginName, loginPassword)) {
 			response.sendRedirect("Home.jsp");
 		} else {
 			response.sendRedirect("BadLogin.jsp");
