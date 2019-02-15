@@ -6,7 +6,8 @@ import java.sql.SQLException;
 
 public class LoginData {
 
-	public boolean getLoginFromDB(String loginName, String password) throws ClassNotFoundException, SQLException, IOException {
+	public boolean getLoginFromDB(String loginName, String password)
+			throws ClassNotFoundException, SQLException, IOException {
 
 		Connection connectToDb = (Connection) JDBCConnection.getConnection();
 		if (connectToDb != null) {
