@@ -23,9 +23,9 @@ public class PatikrintiNaujoUserDuomenys {
 		if (arIrasytaArgumentoReiksme(userLoginName) || arIrasytaArgumentoReiksme(email)
 				|| arIrasytaArgumentoReiksme(userPareigos) || arSlaptazodisSutampa(passw, passwConf)
 				|| arIrasytaArgumentoReiksme(userSkyrius) || arIrasytaArgumentoReiksme(userSurname)) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 }
