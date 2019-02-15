@@ -1,11 +1,8 @@
 package lt.help.desk.bd.login;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class JDBCConnection {
 
@@ -19,11 +16,7 @@ public class JDBCConnection {
 	private static final String USERNAME = "admin";
 	private static final String PASSWORD = "help1111";
 
-	public static Connection getConnection() throws SQLException, ClassNotFoundException, IOException {
-
-		FileInputStream fileInputStream = new FileInputStream("database.properties");
-		Properties prop = new Properties();
-		prop.load(fileInputStream);
+	public static Connection getConnection() throws SQLException, ClassNotFoundException {
 
 		if (instance == null) {
 			instance = new JDBCConnection();
