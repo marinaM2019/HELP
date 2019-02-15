@@ -26,8 +26,6 @@ public class PateiktiGedima extends HttpServlet {
 		String gedimoTema = request.getParameter("gedimoTema").replace("_", " ");
 		String gedimoAprasymas = request.getParameter("gedimoAprasymas");
 
-		
-
 		if (PatikrintiDuArgumentus.arVisiUzpildyti(gedimoTema, gedimoAprasymas)) {
 
 			gedimai.itraukti(gedimoTema, gedimoAprasymas, loginName);

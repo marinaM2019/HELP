@@ -25,27 +25,27 @@ public class LoginUserFromMySql {
 			if (rs.next()) {
 				return true;
 			}
-		} catch (SQLException  e) {
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		return false;
 	}
 
 	public boolean getSuperAdminLogin(String loginName, String loginPassword) {
-        return getLogin(loginName, loginPassword, Vaidmenys.superAdmin);
-    }
+		return getLogin(loginName, loginPassword, Vaidmenys.superAdmin);
+	}
 
-    public boolean getBossConnection(String loginName, String loginPassword) {
-        return getLogin(loginName, loginPassword, Vaidmenys.vadovas_it);
-    }
+	public boolean getBossConnection(String loginName, String loginPassword) {
+		return getLogin(loginName, loginPassword, Vaidmenys.vadovas_it);
+	}
 
-    public boolean getLocalAdminConnection(String loginName, String loginPassword) {
-        return getLogin(loginName, loginPassword, Vaidmenys.darbuotojas_it);
-    }
+	public boolean getLocalAdminConnection(String loginName, String loginPassword) {
+		return getLogin(loginName, loginPassword, Vaidmenys.darbuotojas_it);
+	}
 
-    public boolean getUserConnection(String loginName, String loginPassword) {
-        return getLogin(loginName, loginPassword, Vaidmenys.user);
-    }
+	public boolean getUserConnection(String loginName, String loginPassword) {
+		return getLogin(loginName, loginPassword, Vaidmenys.user);
+	}
 
 	public List<LoginUserAtribute> getLoginUserAtributes(String loginName) {
 		List<LoginUserAtribute> atributuSarasas = new ArrayList<>();

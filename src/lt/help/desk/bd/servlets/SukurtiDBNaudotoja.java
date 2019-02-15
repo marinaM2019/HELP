@@ -34,8 +34,7 @@ public class SukurtiDBNaudotoja extends HttpServlet {
 		if (atikrintiNaujoUserDuomenys.uzpildytiNeVisi(userLoginName, email, userPareigos, passw, passwConf,
 				userSkyrius, userSurname, userName, userVaidmuo)) {
 			throw new RuntimeException("nevisi duomenys užpildyti arba nesutampa slaptažodis");
-		}
-		else {
+		} else {
 			Naudotojai naudotojai = new Naudotojai();
 
 			naudotojai.sukurtiNauja(userLoginName, passw, userName, userSurname, email, userSkyrius, userPareigos,
@@ -43,7 +42,6 @@ public class SukurtiDBNaudotoja extends HttpServlet {
 
 			response.sendRedirect("Administravimas.jsp");
 		}
-		
 
 	}
 

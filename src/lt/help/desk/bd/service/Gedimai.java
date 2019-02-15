@@ -30,7 +30,7 @@ public class Gedimai {
 		}
 	}
 
-	public List<Gedimas> gautiNepaskirtusPagalLaikotarpi (String dataNuo, String dataIki) {
+	public List<Gedimas> gautiNepaskirtusPagalLaikotarpi(String dataNuo, String dataIki) {
 		List<Gedimas> sarasas = new ArrayList<>();
 		try {
 
