@@ -50,7 +50,7 @@ public class Gedimai {
 				sarasas.add(new Gedimas(data, tema, aprasymas, gedimaPateike, statusas));
 
 			}
-		} catch (SQLException | ClassNotFoundException | IOException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 		return sarasas;
@@ -77,7 +77,7 @@ public class Gedimai {
 				sarasas.add(new Gedimas(data, tema, aprasymas, statusas, vykdytojas, vykdytojoIrasoData));
 
 			}
-		} catch (SQLException | ClassNotFoundException | IOException e) {
+		} catch (SQLException | ClassNotFoundException  e) {
 			throw new RuntimeException(e);
 		}
 		return sarasas;

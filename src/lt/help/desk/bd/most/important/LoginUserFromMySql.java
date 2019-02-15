@@ -26,7 +26,7 @@ public class LoginUserFromMySql {
 			if (rs.next()) {
 				return true;
 			}
-		} catch (SQLException | ClassNotFoundException | IOException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 		return false;
@@ -65,7 +65,7 @@ public class LoginUserFromMySql {
 				String pareigos = rs.getString("pareigos");
 				atributuSarasas.add(new LoginUserAtribute(name, surname, skyrius, pareigos));
 			}
-		} catch (SQLException | ClassNotFoundException | IOException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 		return atributuSarasas;
