@@ -1,5 +1,6 @@
 package lt.help.desk.bd.most.important;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class LoginUserFromMySql {
 			if (rs.next()) {
 				return true;
 			}
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException | ClassNotFoundException | IOException e) {
 			throw new RuntimeException(e);
 		}
 		return false;
@@ -64,7 +65,7 @@ public class LoginUserFromMySql {
 				String pareigos = rs.getString("pareigos");
 				atributuSarasas.add(new LoginUserAtribute(name, surname, skyrius, pareigos));
 			}
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException | ClassNotFoundException | IOException e) {
 			throw new RuntimeException(e);
 		}
 		return atributuSarasas;

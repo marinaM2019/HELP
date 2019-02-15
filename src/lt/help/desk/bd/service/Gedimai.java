@@ -1,5 +1,6 @@
 package lt.help.desk.bd.service;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,7 +50,7 @@ public class Gedimai {
 				sarasas.add(new Gedimas(data, tema, aprasymas, gedimaPateike, statusas));
 
 			}
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException | ClassNotFoundException | IOException e) {
 			throw new RuntimeException(e);
 		}
 		return sarasas;
@@ -76,7 +77,7 @@ public class Gedimai {
 				sarasas.add(new Gedimas(data, tema, aprasymas, statusas, vykdytojas, vykdytojoIrasoData));
 
 			}
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException | ClassNotFoundException | IOException e) {
 			throw new RuntimeException(e);
 		}
 		return sarasas;
