@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.itextpdf.text.DocumentException;
 
 import lt.help.desk.bd.gedimai.PatikrintiDuArgumentus;
-import lt.help.desk.bd.most.important.GautiAtaskaita;
+import lt.help.desk.bd.most.important.GautiPDFAtaskaita;
 
 @WebServlet("/servlets/Ataskaita")
 public class Ataskaita extends HttpServlet {
@@ -28,7 +28,7 @@ public class Ataskaita extends HttpServlet {
 		if (PatikrintiDuArgumentus.arVisiUzpildyti(dataNuo, dataIki)) {
 
 			try {
-				GautiAtaskaita.lentelesPavidalu(dataNuo, dataIki, out);
+				GautiPDFAtaskaita.lentelesPavidalu(dataNuo, dataIki, out);
 			} catch (DocumentException e) {
 				throw new RuntimeException(e);
 			}

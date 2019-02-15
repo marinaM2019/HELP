@@ -16,7 +16,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import lt.help.desk.bd.gedimai.PatikrintiDuArgumentus;
 import lt.help.desk.bd.service.Gedimai;
 
-public class GautiAtaskaita {
+public class GautiPDFAtaskaita {
 	
 	public static void lentelesPavidalu (String dataNuo, String dataIki, java.io.OutputStream out) throws DocumentException, IOException {
 	Document document = new Document(PageSize.A4.rotate(), 60, 30, 30, 30);
